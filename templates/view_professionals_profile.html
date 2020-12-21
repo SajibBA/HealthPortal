@@ -5,13 +5,11 @@
 {% endblock %}
 
 {% block breadcrumb %}
-
-  <li class="breadcrumb-item"><a href="{% url 'profile_home' %}"><button class="btn"><i class="fa fa-home"></i> Home</button></a></li>
   <li class="breadcrumb-item active">Visiting {{ person.username }}</li>
-  <li class="breadcrumb-item"><a href="{% url 'view_professionals' %}">Back&#9756;</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'send_message' person.pk %}">&#9993;Send Message</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'profile_home' %}"><button class="btn"><i class="fa fa-home"></i> Home</button></a></li>
+  <li class="breadcrumb-item"><button class="btn" onClick="javascript:history.go(-1);"></i>&#9756;Back</button></a></li>
+  <li class="breadcrumb-item"><a href="{% url 'send_message' person.pk %}"><button class="btn">&#9993;Send Message</button></a></li>
 {% endblock %}
-
 {% block content %}
    <h2>{{ person.username }}</h2>
     <img src="{{ person.profile_pic.url }}"  width="100px" alt="">
