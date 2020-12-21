@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Message</li>
+  <li class="breadcrumb-item"><a href="{% url 'profile_home' %}"><button class="btn"><i class="fa fa-home"></i> Home</button></a></li>
+{% endblock %}
+
+{% block content %}
+   <h2>Contact {{ person.username }}</h2>
+
+{% if message %}
+<center>
+    <h3>Your message was successfully sent to {{ person.username }} !! </h3>
+</center>
+<br/><br/>
+{% else %}
+
+{% endif %}
+
+<form action="{% url 'send_message' person.pk %}" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-12">
+            <textarea name="message_details" class="form-control mb-30" placeholder="Your message"></textarea>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn dento-btn">Send Message</button>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}

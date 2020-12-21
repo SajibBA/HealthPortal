@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ person.name }} - {{ block.super }}
+{% endblock %}
+
+{% block breadcrumb %}
+
+  <li class="breadcrumb-item"><a href="{% url 'profile_home' %}"><button class="btn"><i class="fa fa-home"></i> Home</button></a></li>
+  <li class="breadcrumb-item active">Visiting {{ person.username }}</li>
+  <li class="breadcrumb-item"><a href="{% url 'view_professionals' %}">Back&#9756;</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'send_message' person.pk %}">&#9993;Send Message</a></li>
+{% endblock %}
+
+{% block content %}
+   <h2>{{ person.username }}</h2>
+    <img src="{{ person.profile_pic.url }}"  width="100px" alt="">
+    <ul>
+        <li>First name= {{ person.first_name }}</li>
+        <li>Last name= {{ person.last_name }}</li>
+        <li>Email= {{ person.email }}</li>
+         <li>Phone number= {{ person.phone_number }}</li>
+         <li>Gender= {{ person.gender }}</li>
+         <li>Date of birth= {{ person.date_of_birth }}</li>
+         <li>Address= {{ person.address }}</li>
+    </ul>
+    {% if person.is_normal %}
+    {% elif person.is_professional %}
+    <ul>
+         <li>Profession= {{ person.professional.profession }}</li>
+         <li>Speciality= {{ person.professional.speciality }}</li>
+    </ul>
+    {% endif %}
+{% endblock %}

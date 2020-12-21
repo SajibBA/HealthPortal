@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Professionals</li>
+  <li class="breadcrumb-item"><a href="{% url 'profile_home' %}"><button class="btn"><i class="fa fa-home"></i> Home</button></a></li>
+{% endblock %}
+
+{% block content %}
+
+  <li><a href="{% url 'search_professionals' %}" class="btn btn-primary btn-sm" role="button" >Search Professionals by professions</a></li>
+<div style="background-color:silver;color:black;padding:10px;">
+  <form method="get">
+    {{myFilter.form}}
+    <button type="submit">Search</button>
+  </form>
+</div>
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Username</th>
+        <th>Profile Pic</th>
+        <th>Name</th>
+          <th>Profession</th>
+          <th>Speciality</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for person in person %}
+      {% if person.is_professional %}
+        <tr>
+            <td class="align-middle"><a href="{% url 'view_professionals_profile' person.pk %}">{{ person.username }}</a></td>
+            <td><img class="img-responsive" src="{{ person.profile_pic.url }}" width="100px" /></td>
+            <td class="align-middle">{{ person.first_name }} {{ person.last_name }}</td>
+            <td class="align-middle">{{ person.professional.profession }}</td>
+            <td class="align-middle">{{ person.professional.speciality }}</td>
+        </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

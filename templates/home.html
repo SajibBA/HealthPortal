@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+   <h2>Hello! {{ user.username }}</h2>
+  <a href="{% url 'signup' %}" class="btn btn-student btn-lg" role="button">Signup</a>
+  <a href="{% url 'login' %}" class="btn btn-student btn-lg" role="button">Login</a>
+     {% if user.is_authenticated %}
+  <a href="{% url 'profile_home' %}" class="btn btn-student btn-lg" role="button">Home</a>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+   <h2>Hello {{ user.username }}</h2>
+    <img src="{{ user.profile_pic.url }}"  width="100px" alt="">
+    <ul>
+        <li>First name= {{ user.first_name }}</li>
+        <li>Last name= {{ user.last_name }}</li>
+        <li>Email= {{ user.email }}</li>
+         <li>Phone number= {{ user.phone_number }}</li>
+         <li>Gender= {{ user.gender }}</li>
+         <li>Date of birth= {{ user.date_of_birth }}</li>
+         <li>Address= {{ user.address }}</li>
+    </ul>
+    {% if user.is_authenticated and user.is_normal %}
+  <a href="{% url 'normal_edit_profile' %}" class="btn btn-student btn-lg" role="button">Edit Profile</a>
+    {% elif user.is_professional %}
+    <ul>
+         <li>Profession= {{ user.professional.profession }}</li>
+         <li>Speciality= {{ user.professional.speciality }}</li>
+    </ul>
+  <a href="{% url 'professional_edit_profile' %}" class="btn btn-student btn-lg" role="button">Edit Profile</a>
+    {% endif %}
+{% endblock %}

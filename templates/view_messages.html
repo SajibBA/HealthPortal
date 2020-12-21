@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Messages</li>
+  <li class="breadcrumb-item"><a href="{% url 'profile_home' %}"><button class="btn"><i class="fa fa-home"></i> Home</button></a></li>
+{% endblock %}
+
+{% block content %}
+
+ <div style="background-color:silver;color:black;padding:10px;">
+  <form method="get">
+    {{myFilter.form}}
+    <button type="submit">Search</button>
+  </form>
+</div>
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>From</th>
+          <th>Message Details</th>
+          <th>Send at</th>
+        <th>Action</th>
+
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% for message in message %}
+            <td class="align-middle"><a href="{% url 'view_professionals_profile' message.sent_from_id %}">{{ message.sent_from }}</a></td>
+            <td class="align-middle">{{ message.message_details }}</td>
+            <td class="align-middle">{{ message.sent_at }}</td>
+            {% if message.mark_as_read %}
+            <td class="align-middle"><a href="{% url 'update_message' message.pk %}"><button>Mark as unread<i class="fa fa-envelope-o" aria-hidden="true"></i></button></a>
+                <a class="btn btn-danger" href="{% url 'delete_message' message.pk %}" aria-label="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+            {% else %}
+            <td class="align-middle"><a href="{% url 'update_message' message.pk %}"><button>Mark as read<i class="fa fa-envelope-open-o" aria-hidden="true"></i></button></a>
+            <a class="btn btn-danger" href="{% url 'delete_message' message.pk %}" aria-label="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+            {% endif %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
