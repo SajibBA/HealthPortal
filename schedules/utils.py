@@ -1,9 +1,6 @@
-# calendarapp/utils.py
+# /utils.py
 
-from datetime import datetime, timedelta
 from calendar import HTMLCalendar
-
-from bokeh.embed import bundle
 
 from .models import Event
 #from eventcalendar.helper import get_current_user
@@ -22,8 +19,12 @@ class Calendar(HTMLCalendar):
         events_per_day = events.filter(start_time__day=day)
         d = ''
         for event in events_per_day:
-            d += f'<li> {event.get_html_url} </li>'
-
+            if event.status == 'Done':
+                d += f'<li> {event.get_html_url}<i class="fa fa-check-circle-o" style="color:green" aria-hidden="true"></i></li>'
+            elif event.status == 'Canceled':
+                d += f'<li> {event.get_html_url}<i class="fa fa-ban" style="color:red" aria-hidden="true"></i></li>'
+            else:
+                d += f'<li> {event.get_html_url}<i class="fa fa-refresh" style="color:blue" aria-hidden="true"></i></li>'
         if day != 0:
             return f"<td><span class='date'>{day}</span><ul> {d}</ul></td>"
         return '<td></td>'
@@ -46,3 +47,4 @@ class Calendar(HTMLCalendar):
             cal += f'{self.formatweek(week, events)}\n'
         return cal
 
+#calender for appointment------------

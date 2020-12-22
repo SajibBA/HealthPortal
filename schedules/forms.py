@@ -3,6 +3,8 @@ from datetime import datetime, date
 from .models import Event
 from django import forms
 
+# Calender forms
+
 
 class EventForm(ModelForm):
   start_time = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}
@@ -15,7 +17,7 @@ class EventForm(ModelForm):
     exclude = ['user']
 
 
-
+#
 
 
 

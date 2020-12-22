@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 
 from profiles.models import Person
 
+# Calender models
+
 
 class Event(models.Model):
     user = models.ForeignKey(Person, on_delete=models.CASCADE)
@@ -12,6 +14,12 @@ class Event(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     created_date = models.DateTimeField(auto_now_add=True)
+    STATUS_CHOICES = (
+        ('Pending', 'Pending'),
+        ('Done', 'Done'),
+        ('Canceled', 'Canceled'),
+    )
+    status = models.CharField(max_length=20, default='Pending', choices=STATUS_CHOICES)
 
     def __str__(self):
         return self.title

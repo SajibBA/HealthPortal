@@ -17,6 +17,8 @@ from .models import *
 from .utils import Calendar
 from .forms import EventForm
 
+# Calender views------------
+
 
 def get_date(req_day):
     if req_day:
@@ -63,12 +65,14 @@ def create_event(request):
         description = form.cleaned_data['description']
         start_time = form.cleaned_data['start_time']
         end_time = form.cleaned_data['end_time']
+        status = form.cleaned_data['status']
         Event.objects.get_or_create(
             user=request.user,
             title=title,
             description=description,
             start_time=start_time,
-            end_time=end_time
+            status=status,
+            end_time = end_time
         )
         return HttpResponseRedirect(reverse('calendar'))
     return render(request, 'calender/event.html', {'form': form})
@@ -76,7 +80,7 @@ def create_event(request):
 
 class EventEdit(generic.UpdateView):
     model = Event
-    fields = ['title', 'description', 'start_time', 'end_time']
+    fields = ['title', 'description', 'start_time', 'end_time', 'status']
     template_name = 'calender/event.html'
 
 
