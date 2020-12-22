@@ -37,7 +37,7 @@ class Normal(models.Model):
 
 class Message(models.Model):
     message_details = models.TextField(max_length=4000)
-    sent_from = models.ForeignKey(Person, related_name='sent_from',on_delete=models.CASCADE,)
-    sent_to = models.ForeignKey(Person, related_name='sent_to',on_delete=models.CASCADE,)
+    sent_from = models.ForeignKey(Person, related_name='sent_from', on_delete=models.CASCADE,)
+    sent_to = models.ForeignKey(Person, related_name='sent_to', on_delete=models.CASCADE,)
     sent_at = models.DateTimeField(auto_now_add=True)
     mark_as_read = models.BooleanField(default=False)

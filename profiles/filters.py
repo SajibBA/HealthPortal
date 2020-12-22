@@ -10,7 +10,6 @@ class PersonFilter(django_filters.FilterSet):
         fields = {
             'username',
             'first_name',
-
         }
         filter_overrides = {
             models.CharField: {
@@ -31,16 +30,33 @@ class PersonFilter(django_filters.FilterSet):
         }
 
 
-
 class ProfessionFilter(django_filters.FilterSet):
     class Meta:
         model = Professional
-        fields = [
+        fields = {
             'person__username',
             'person__first_name',
             'profession',
             'speciality',
-      ]
+        }
+        filter_overrides = {
+            models.CharField: {
+                'filter_class': django_filters.CharFilter,
+                'extra': lambda f: {
+                    'lookup_expr': 'icontains',
+                },
+            },
+            models.BooleanField: {
+                'filter_class': django_filters.BooleanFilter,
+                'extra': lambda f: {
+                    'widget': forms.CheckboxInput,
+                },
+            },
+            models.DateTimeField: {
+                'filter_class': django_filters.IsoDateTimeFilter
+            },
+        }
+
 
 
 class MessageFilter(django_filters.FilterSet):
