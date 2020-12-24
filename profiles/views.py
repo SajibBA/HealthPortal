@@ -127,6 +127,9 @@ def search_professionals(request):
     return render(request, 'search_professionals.html', context)
 
 
+# Message Part.............
+
+
 def send_message(request, pk):
     try:
         person = Person.objects.get(pk=pk)
@@ -169,3 +172,4 @@ def delete_message(request, pk):
     message = get_object_or_404(Message, pk=pk)
     message.delete()
     return redirect("view_messages")
+

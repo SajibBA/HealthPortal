@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Appointment Schedule</li>
+  <li class="breadcrumb-item"><a href="{% url 'profile_home' %}"><button class="btn"><i class="fa fa-home"></i> Home</button></a></li>
+{% endblock %}
+
+{% block content %}
+
+  <table class="table">
+    <thead class="thead-inverse">
+    </thead>
+      <tr>
+          <thread class="thead-inverse">
+              <th></th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Action</th>
+          </thread>
+      </tr>
+    <tbody>
+    {% if sat %}
+    <th class="align-middle" rowspan="{{ sat }}">Saturday</th>
+    {% for schedule in appointment_schedule %}
+        {% if schedule.day == "Saturday" %}
+        <tr>
+            <td class="align-middle">{{ schedule.start_time }}</td>
+            <td class="align-middle">{{ schedule.end_time }}</td>
+            <td class="align-middle"><a class="btn btn-info" href="{% url 'appointment_schedule_edit' schedule.pk %}" aria-label="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+            <a class="btn btn-danger" href="{% url 'delete_appointment_schedule' schedule.pk %}" aria-label="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if sun %}
+    <th class="align-middle" rowspan="{{ sun }}">Sunday</th>
+    {% for schedule in appointment_schedule %}
+        {% if schedule.day == "Sunday" %}
+        <tr>
+            <td class="align-middle">{{ schedule.start_time }}</td>
+            <td class="align-middle">{{ schedule.end_time }}</td>
+            <td class="align-middle"><a class="btn btn-info" href="{% url 'appointment_schedule_edit' schedule.pk %}" aria-label="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+            <a class="btn btn-danger" href="{% url 'delete_appointment_schedule' schedule.pk %}" aria-label="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if mon %}
+    <th class="align-middle" rowspan="{{ mon }}">Monday</th>
+    {% for schedule in appointment_schedule %}
+        {% if schedule.day == "Monday" %}
+        <tr>
+            <td class="align-middle">{{ schedule.start_time }}</td>
+            <td class="align-middle">{{ schedule.end_time }}</td>
+            <td class="align-middle"><a class="btn btn-info" href="{% url 'appointment_schedule_edit' schedule.pk %}" aria-label="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+            <a class="btn btn-danger" href="{% url 'delete_appointment_schedule' schedule.pk %}" aria-label="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if tue %}
+    <th class="align-middle" rowspan="{{ tue }}">Tuesday</th>
+    {% for schedule in appointment_schedule %}
+        {% if schedule.day == "Tuesday" %}
+        <tr>
+            <td class="align-middle">{{ schedule.start_time }}</td>
+            <td class="align-middle">{{ schedule.end_time }}</td>
+            <td class="align-middle"><a class="btn btn-info" href="{% url 'appointment_schedule_edit' schedule.pk %}" aria-label="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+            <a class="btn btn-danger" href="{% url 'delete_appointment_schedule' schedule.pk %}" aria-label="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if wed %}
+    <th class="align-middle" rowspan="{{ wed }}">Wednesday</th>
+    {% for schedule in appointment_schedule %}
+        {% if schedule.day == "Wednesday" %}
+        <tr>
+            <td class="align-middle">{{ schedule.start_time }}</td>
+            <td class="align-middle">{{ schedule.end_time }}</td>
+            <td class="align-middle"><a class="btn btn-info" href="{% url 'appointment_schedule_edit' schedule.pk %}" aria-label="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+            <a class="btn btn-danger" href="{% url 'delete_appointment_schedule' schedule.pk %}" aria-label="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if thus %}
+    <th class="align-middle" rowspan="{{ thus }}">Thursday</th>
+    {% for schedule in appointment_schedule %}
+        {% if schedule.day == "Thursday" %}
+        <tr>
+            <td class="align-middle">{{ schedule.start_time }}</td>
+            <td class="align-middle">{{ schedule.end_time }}</td>
+            <td class="align-middle"><a class="btn btn-info" href="{% url 'appointment_schedule_edit' schedule.pk %}" aria-label="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+            <a class="btn btn-danger" href="{% url 'delete_appointment_schedule' schedule.pk %}" aria-label="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if fri %}
+    <th class="align-middle" rowspan="{{ fri }}">Friday</th>
+    {% for schedule in appointment_schedule %}
+        {% if schedule.day == "Friday" %}
+        <tr>
+            <td class="align-middle">{{ schedule.start_time }}</td>
+            <td class="align-middle">{{ schedule.end_time }}</td>
+            <td class="align-middle"><a class="btn btn-info" href="{% url 'appointment_schedule_edit' schedule.pk %}" aria-label="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+            <a class="btn btn-danger" href="{% url 'delete_appointment_schedule' schedule.pk %}" aria-label="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+    </tbody>
+  </table>
+{% endblock %}

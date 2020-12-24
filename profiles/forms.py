@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.db import transaction
 from django.forms.utils import ValidationError
-
+from django.utils.translation import ugettext as _
 from .models import *
 
 
@@ -36,6 +36,12 @@ class ProfessionalSignUpForm(UserCreationForm):
 
         ]
 
+    def clean_date_of_birth(self):
+        date_of_birth = self.cleaned_data['date_of_birth']
+        if date_of_birth > datetime.date.today():
+            raise forms.ValidationError("The date cannot be in the future!")
+        return date_of_birth
+
 
 
     @transaction.atomic
@@ -44,7 +50,7 @@ class ProfessionalSignUpForm(UserCreationForm):
         person.is_professional = True
         person.save()
         professional = Professional.objects.create(person=person, profession=self.cleaned_data.get('profession'),
-                                                   speciality=self.cleaned_data.get('speciality'))
+                                                       speciality=self.cleaned_data.get('speciality'))
         return person
 
 
@@ -69,6 +75,12 @@ class NormalSignUpForm(UserCreationForm):
             'address',
 
         ]
+
+    def clean_date_of_birth(self):
+        date_of_birth = self.cleaned_data['date_of_birth']
+        if date_of_birth > datetime.date.today():
+            raise forms.ValidationError("The date cannot be in the future!")
+        return date_of_birth
 
     @transaction.atomic
     def save(self,  commit=True):
@@ -100,6 +112,12 @@ class NormalProfileEditForm(UserChangeForm):
                 attrs={'type': 'date'}
             )
         )
+
+    def clean_date_of_birth(self):
+        date_of_birth = self.cleaned_data['date_of_birth']
+        if date_of_birth > datetime.date.today():
+            raise forms.ValidationError("The date cannot be in the future!")
+        return date_of_birth
 
     @transaction.atomic
     def save(self,  commit=True):
@@ -138,6 +156,12 @@ class ProfessionalProfileEditForm(UserChangeForm):
             attrs={'type': 'date'}
         )
     )
+
+    def clean_date_of_birth(self):
+        date_of_birth = self.cleaned_data['date_of_birth']
+        if date_of_birth > datetime.date.today():
+            raise forms.ValidationError("The date cannot be in the future!")
+        return date_of_birth
 
     @transaction.atomic
     def save(self, commit=True):

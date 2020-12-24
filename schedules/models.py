@@ -33,3 +33,23 @@ class Event(models.Model):
         return f'<a href="{url}"> {self.title} </a>'
 
 
+# appointment parts...
+
+
+class AppointmentSchedule(models.Model):
+    creator = models.ForeignKey(Person, on_delete=models.CASCADE)
+    DAY_CHOICES = (
+        ('Monday', 'Monday'),
+        ('Tuesday', 'Tuesday'),
+        ('Wednesday', 'Wednesday'),
+        ('Thursday', 'Thursday'),
+        ('Friday', 'Friday'),
+        ('Saturday', 'Saturday'),
+        ('Sunday', 'Sunday'),
+    )
+    day = models.CharField(max_length=20, choices=DAY_CHOICES)
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+
+
+
