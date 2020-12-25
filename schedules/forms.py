@@ -2,6 +2,7 @@ from django.forms import ModelForm, DateInput
 from datetime import datetime, date
 from .models import *
 from django import forms
+import datetime
 
 # Calender forms
 
@@ -36,4 +37,36 @@ class AppointmentScheduleCreateForm(ModelForm):
         end_time = self.cleaned_data['end_time']
         if start_time > end_time:
             raise forms.ValidationError("StartTime must be earlier than the EndTime!!")
+
+
+class AppointmentDatePickerForm(ModelForm):
+
+    class Meta:
+        model = Appointments
+        fields = [
+            'date',
+        ]
+
+    date = forms.DateField(
+        widget=forms.TextInput(
+            attrs={'type': 'date'}
+        )
+    )
+
+    def clean_date(self):
+        date = self.cleaned_data['date']
+        if date < datetime.date.today():
+            raise forms.ValidationError("The date cannot be in the past!")
+        return date
+
+
+class AppointmentCreateForm(ModelForm):
+
+    class Meta:
+        model = Appointments
+        fields = [
+            'title',
+            'description',
+        ]
+
 

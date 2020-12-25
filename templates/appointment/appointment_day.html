@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="clearfix">
+  <a class="btn btn-info left" href="{% url 'profile_home' %}"> Home </a>
+  <button class="btn" onClick="javascript:history.go(-1);"></i>&#9756;Back</button></a>
+</div>
+
+<h2>Appointment to {{ person.username }}</h2>
+
+<form method="post">
+  {% csrf_token %}
+  <table class="form form-table">
+    {{ form_date }}
+      <div>
+              {% if messages %}
+          <ul class="messages">
+          {% for message in messages %}
+          <li style="color:red">{{ message }}</li>
+          {% endfor %}
+          </ul>
+      {% endif %}
+      </div>
+    <tr><td colspan="2"><button type="submit"  name="_date" class="btn btn-info right"> Choose </button></td></tr>
+  </table>
+</form>
+
+<div class="row">
+        <div class="col-12">
+            <div class="col-12">
+                Date : {{ date_of_appointment }} {{ day_of_appointment }}
+                <h3>Available Slots</h3>
+                {% for schedule in appointment_schedule %}
+                    {% if schedule.day == day_of_appointment %}
+                <table class="table">
+                    {% if appointment_list %}
+                        {% for appointment in appointment_list %}
+                            {% if schedule.start_time != appointment.start_time %}
+                        <td class="align-middle"><a href="{% url 'appointment_create' date_of_appointment schedule.pk %}">{{ schedule.start_time }}-{{ schedule.end_time }}</a></td>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                    <td class="align-middle"><a href="{% url 'appointment_create' date_of_appointment schedule.pk %}">{{ schedule.start_time }}-{{ schedule.end_time }}</a></td>
+                    {% endif %}
+                </table>
+                    {% endif %}
+                {% endfor %}<br/><br/>
+
+
+                 Choose Slot
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

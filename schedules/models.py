@@ -52,4 +52,18 @@ class AppointmentSchedule(models.Model):
     end_time = models.TimeField()
 
 
+class Appointments(models.Model):
+    appointment_from = models.ForeignKey(Person,related_name='appointment_from', on_delete=models.CASCADE)
+    appointment_to = models.ForeignKey(Person,related_name='appointment_to', on_delete=models.CASCADE)
+    title = models.CharField(max_length=200, unique=True)
+    description = models.TextField()
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    STATUS_CHOICES = (
+        ('Pending', 'Pending'),
+        ('Done', 'Done'),
+        ('Canceled', 'Canceled'),
+    )
+    status = models.CharField(max_length=20, default='Pending', choices=STATUS_CHOICES)
 

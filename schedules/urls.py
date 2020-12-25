@@ -15,5 +15,9 @@ urlpatterns = [
          name='delete_appointment_schedule'),
     path(r'appointment_schedule/edit/<int:pk>/', views.AppointmentScheduleEdit.as_view(),
          name='appointment_schedule_edit'),
+    path(r'appointment_day/(?P<pk>\d+)/', views.appointment_day, name='appointment_day'),
+    path(r'appointment_create/(?P<date>\w+)/(?P<schedule_pk>[\w-]+)/$', views.appointment_create,
+         name='appointment_create'),
+
 
 ]

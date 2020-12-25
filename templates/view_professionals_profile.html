@@ -9,6 +9,7 @@
   <li class="breadcrumb-item"><a href="{% url 'profile_home' %}"><button class="btn"><i class="fa fa-home"></i> Home</button></a></li>
   <li class="breadcrumb-item"><button class="btn" onClick="javascript:history.go(-1);"></i>&#9756;Back</button></a></li>
   <li class="breadcrumb-item"><a href="{% url 'send_message' person.pk %}"><button class="btn">&#9993;Send Message</button></a></li>
+  <li class="breadcrumb-item"><a href="{% url 'appointment_day' person.pk %}"><button class="btn">Make appointment</button></a></li>
 {% endblock %}
 {% block content %}
    <h2>{{ person.username }}</h2>

@@ -1,5 +1,6 @@
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.messages.views import SuccessMessageMixin
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
@@ -11,6 +12,7 @@ from django.db.models import Avg, Count
 from django.forms import inlineformset_factory
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
+from django.utils.translation import ugettext_lazy as _
 from django.utils.decorators import method_decorator
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
@@ -49,7 +51,7 @@ class Login(TemplateView):
     template_name = 'registration/login.html'
 
 
-class NormalSignUpView(CreateView):
+class NormalSignUpView(SuccessMessageMixin, CreateView):
     model = Person
     form_class = NormalSignUpForm
     template_name = 'registration/signup_form.html'
@@ -64,7 +66,7 @@ class NormalSignUpView(CreateView):
         return redirect('home')
 
 
-class ProfessionalSignUpView(CreateView):
+class ProfessionalSignUpView(SuccessMessageMixin, CreateView):
     model = Person
     form_class = ProfessionalSignUpForm
     template_name = 'registration/signup_form.html'
@@ -79,7 +81,7 @@ class ProfessionalSignUpView(CreateView):
         return redirect('home')
 
 
-class NormalProfileEditView(UpdateView):
+class NormalProfileEditView(SuccessMessageMixin, UpdateView):
     form_class = NormalProfileEditForm
     template_name = 'registration/edit_profile.html'
     success_url = reverse_lazy('profile')
@@ -88,19 +90,21 @@ class NormalProfileEditView(UpdateView):
         return self.request.user
 
 
-class ProfessionalProfileEditView(UpdateView):
+class ProfessionalProfileEditView(SuccessMessageMixin, UpdateView):
     form_class = ProfessionalProfileEditForm
     template_name = 'registration/edit_profile.html'
     success_url = reverse_lazy('profile')
+    success_message = _('Profile successfully updated')
 
     def get_object(self):
         return self.request.user
 
 
-class ProfilePasswordChangeView(PasswordChangeView):
+class ProfilePasswordChangeView(SuccessMessageMixin, PasswordChangeView):
     form_class = PasswordChangeForm
     template_name = 'registration/change_password.html'
     success_url = reverse_lazy('profile_home')
+
 
 
 def view_professionals(request):

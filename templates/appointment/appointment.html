@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="clearfix">
+  <a class="btn btn-info left" href="{% url 'profile_home' %}"> Home </a>
+</div>
+
+<h2>Appointment to {{ person.username }}</h2>
+
+<form action="{% url 'appointment_day' person.pk %}" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-12">
+            <div class="col-12">
+                <div class="input-field col s12">
+                  <input id="date" type="date" class="validate" name="date_of_appointment">
+                 Choose Date
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn dento-btn">Choose</button>
+        </div>
+    </div>
+</form>
+
+
+
+
+{% endblock %}
