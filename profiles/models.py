@@ -41,3 +41,17 @@ class Message(models.Model):
     sent_to = models.ForeignKey(Person, related_name='sent_to', on_delete=models.CASCADE,)
     sent_at = models.DateTimeField(auto_now_add=True)
     mark_as_read = models.BooleanField(default=False)
+
+
+class Ratings(models.Model):
+    review = models.TextField(max_length=4000)
+    rate_from = models.ForeignKey(Person, related_name='rate_from', on_delete=models.CASCADE,)
+    rate_to = models.ForeignKey(Person, related_name='rate_to', on_delete=models.CASCADE,)
+    RATE_CHOICES = (
+        (1, 'Very Bad'),
+        (2, 'Bad'),
+        (3, 'Average'),
+        (4, 'Good'),
+        (5, 'Very Good'),
+    )
+    rating = models.IntegerField(max_length=1, choices=RATE_CHOICES)

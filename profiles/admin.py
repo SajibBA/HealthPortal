@@ -6,3 +6,5 @@ from schedules.models import *
 
 admin.site.register(Person)
 admin.site.register(AppointmentSchedule)
+admin.site.register(Appointments)
+admin.site.register(Ratings)

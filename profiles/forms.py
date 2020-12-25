@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.db import transaction
+from django.forms import ModelForm
 from django.forms.utils import ValidationError
 from django.utils.translation import ugettext as _
 from .models import *
@@ -172,3 +173,12 @@ class ProfessionalProfileEditForm(UserChangeForm):
                                                                          speciality=self.cleaned_data.get('speciality'))
         return person
 
+
+class RatingForm(ModelForm):
+
+    class Meta:
+        model = Ratings
+        fields = [
+            'rating',
+            'review',
+        ]
