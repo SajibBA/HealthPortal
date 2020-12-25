@@ -12,6 +12,7 @@
   <li class="breadcrumb-item"><a href="{% url 'appointment_day' person.pk %}"><button class="btn">Make appointment</button></a></li>
 {% endblock %}
 {% block content %}
+<button type="button" onClick="window.location.reload();">Refresh</button>
 <div class="row">
  <div class="col-sm-6">
    <h2>{{ person.username }}</h2>

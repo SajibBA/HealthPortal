@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+        <br>
+        <h5> Welcome, <b>{{user}} !</b></h5>
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <br>
+    <div class="container">
+        <h4>Here is your Appointment for today, &nbsp {{time}} :</h4>
+        <table class="table">
+            <thead>
+            {% if user.is_normal %}
+                <th>Specialist</th>
+            {% else %}
+                <th>Client</th>
+            {% endif %}
+                <th>Title</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <!-- {{today_appoint}} -->
+                {% for appointment in today_appoint %}
+                <tr>
+                {% if user.is_normal %}
+                    <td>{{ appointment.appointment_to }}</td>
+                {% else %}
+                    <td>{{ appointment.appointment_from }}</td>
+                {% endif %}
+                    <td>{{ appointment.title }}</td>
+                    <td>{{ appointment.start_time }}-{{ appointment.end_time }}</td>
+                    <td>{{ appointment.status }}</td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+        <br>
+    <div class="container">
+        <h4>Your Other Appointments:</h4>
+        <table class="table">
+            <thead>
+            {% if user.is_normal %}
+                <th>Specialist</th>
+            {% else %}
+                <th>Client</th>
+            {% endif %}
+                <th>Title</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                {%for appointment in appointments%}
+                <tr>
+                    {% if user.is_normal %}
+                    <td>{{ appointment.appointment_to }}</td>
+                {% else %}
+                    <td>{{ appointment.appointment_from }}</td>
+                {% endif %}
+                    <td>{{ appointment.title }}</td>
+                    <td>{{ appointment.start_time }}-{{ appointment.end_time }}</td>
+                    <td>{{ appointment.status }}</td>
+                    <td></td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        <br>
+    </div>
+
+{% endblock %}

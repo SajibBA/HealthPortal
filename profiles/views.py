@@ -37,11 +37,15 @@ def profile(request):
 def profile_home(request):
     message = Message.objects.filter(sent_to=request.user)
     flag = 0
-    for message in message:
-        if message.mark_as_read == 0:
+    flag2 = 0
+    for messa in message:
+        if messa.mark_as_read == 0:
             flag = 1
             break
-    context = {'flag': flag}
+    for mess in message:
+        if mess.mark_as_read == 0:
+            flag2 = flag2 + 1
+    context = {'flag': flag, 'flag2': flag2}
     return render(request, 'profile_home.html', context)
 
 
@@ -189,7 +193,7 @@ def view_professionals_profile(request, pk):
                     rate_to=rate_to
                 )
             else:
-                given_rating = Ratings.objects.update(
+                given_rating = Ratings.objects.filter(rate_from=rate_from, rate_to=rate_to).update(
                     rate_from=rate_from,
                     rating=rating,
                     review=review,

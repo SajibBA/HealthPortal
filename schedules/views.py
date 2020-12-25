@@ -254,3 +254,18 @@ def appointment_create(request, date, schedule_pk):
         return HttpResponseRedirect(reverse('profile_home'))
     return render(request, 'appointment/appointment_create.html', context)
 
+
+def appointment_view(request):
+    if request.user.is_normal == 1:
+        appointments = Appointments.objects.filter(appointment_from=request.user).exclude(date=date.today())
+        today_appoint = Appointments.objects.filter(appointment_from=request.user).filter(date=date.today())
+    else:
+        appointments = Appointments.objects.filter(appointment_to=request.user).exclude(date=date.today())
+        today_appoint = Appointments.objects.filter(appointment_to=request.user).filter(date=date.today())
+    # others = User.objects.all().exclude(appoint__id=request.session['id'])
+    context = {
+        'time': date.today(),
+        "appointments": appointments,
+        "today_appoint": today_appoint
+    }
+    return render(request, 'appointment/appointment_view.html', context)
