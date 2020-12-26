@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+   <h2>Join {{ chat_room.title }} as </h2>
+  <a href="{% url 'live_chatroom' chat_room.pk %}" class="btn btn-student btn-lg" role="button">Myself</a>
+  <a href="{% url 'anonymous_chatroom' chat_room.pk %}" class="btn btn-teacher btn-lg" role="button">Anonymous</a>
+{% endblock %}

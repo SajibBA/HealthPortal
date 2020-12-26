@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Message</li>
+  <li class="breadcrumb-item"><a href="{% url 'profile_home' %}"><button class="btn"><i class="fa fa-home"></i> Home</button></a></li>
+  <li class="breadcrumb-item"><a class="btn btn-info left" href="{% url 'view_chatroom' %}"> Back</a></li>
+{% endblock %}
+
+{% block content %}
+
+<div class="row" style="float: center;">
+    <div class="col-sm-4">
+        <table class="table">
+            <tr>
+                <th>
+                    Chatroom : {{ chat_room.title }}
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    {{ chat_room.description }}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Created By : {{ chat_room.creator}}
+                </th>
+            </tr>
+        </table>
+    </div>
+
+    <div class="col-sm-6">
+
+      <div id="livechat" class="wrapper">
+                <p>
+                    {% for ch in chat_all %}
+                    <div class="panel panel-default">
+                      {% if ch.sender == sender_person %}
+          <div class="panel-body">{{ ch.chat_body }}</div>
+                              <div class="panel-footer"><span class="label label-success " style="float: right;">{{ ch.sender }}</span><span class="label label-default " style="float: right;">{{ ch.created_date }}</span></div>
+
+                      {% else %}
+          <div class="panel-body">{{ ch.chat_body }}</div>
+                              <div class="panel-footer"><span class="label label-info " style="float: left;">{{ ch.sender }}</span><span class="label label-default " style="float: left;">{{ ch.created_date }}</span></div>
+
+                      {% endif %}
+                    </div>
+                    {% endfor %}
+                </p>
+      </div>
+        <div id="chatting">
+            <form action="{% url 'live_chatroom' chat_room.pk %}" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-12">
+                        <textarea name="chat_body" class="form-control mb-30" placeholder="Your message"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn dento-btn">Send Message</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    var objDiv = document.getElementById("livechat");
+    objDiv.scrollTop = objDiv.scrollHeight;
+</script>
+
+
+{% endblock %}
+
+

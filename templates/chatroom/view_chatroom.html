@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Chatrooms</li>
+  <li class="breadcrumb-item"><a href="{% url 'profile_home' %}"><button class="btn"><i class="fa fa-home"></i> Home</button></a></li>
+{% endblock %}
+
+{% block content %}
+
+<div style="background-color:silver;color:black;padding:10px;">
+  <form method="get">
+    {{myFilter.form}}
+    <button type="submit">Search</button>
+  </form>
+</div>
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Anonymous Supported</th>
+        <th>Status</th>
+        <th>Creator</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for chat in chatroom %}
+        <tr>
+          {% if chat.is_private %}
+            <td class="align-middle"><a href="{% url 'protected_chatroom' chat.id %}">{{ chat.title }}</a></td>
+          {% elif chat.is_anonymous_supported %}
+            <td class="align-middle"><a href="{% url 'join_chatroom' chat.id %}">{{ chat.title }}</a></td>
+          {% else %}
+            <td class="align-middle"><a href="{% url 'live_chatroom' chat.id %}">{{ chat.title }}</a></td>
+          {% endif %}
+            <td class="align-middle">{{ chat.description }}</td>
+            <td class="align-middle">{{ chat.is_anonymous_supported }}</td>
+            <td class="align-middle">{{ chat.is_private }}</td>
+            <td class="align-middle">{{ chat.creator }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+
+

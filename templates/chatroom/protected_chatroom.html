@@ -7,25 +7,26 @@
 {% endblock %}
 
 {% block content %}
-   <h2>Contact {{ person.username }}</h2>
+   <h2>Enter Passoword to join : {{ chat_room.title }}</h2>
 
 {% if message %}
 <center>
-    <h3>Your message was successfully sent to {{ person.username }} !! </h3>
+    <h3> {{ message }} !! </h3>
 </center>
 <br/><br/>
 {% else %}
 
 {% endif %}
 
-<form action="{% url 'send_message' person.pk %}" method="post">
+<form action="{% url 'protected_chatroom' chat_room.pk %}" method="post">
     {% csrf_token %}
     <div class="row">
         <div class="col-12">
-            <textarea name="message_details" class="form-control mb-30" placeholder="Your message"></textarea>
+            <input type="password" id="inputPassword" name="password_get" class="form-control" placeholder="Password" required>
+  <label for="inputPassword">Password</label>
         </div>
         <div class="col-12">
-            <button type="submit" class="btn dento-btn">Send Message</button>
+            <button type="submit" class="btn dento-btn">Enter</button>
         </div>
     </div>
 
