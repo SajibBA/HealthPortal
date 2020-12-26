@@ -19,6 +19,9 @@ urlpatterns = [
     path(r'appointment_create/(?P<date>\w+)/(?P<schedule_pk>[\w-]+)/$', views.appointment_create,
          name='appointment_create'),
     path(r'appointment_view/', views.appointment_view, name='appointment_view'),
+    path(r'update_appointment/(?P<pk>\d+)/', views.update_appointment, name='update_appointment'),
+    path(r'canceled_appointment/(?P<pk>\d+)/', views.canceled_appointment, name='canceled_appointment'),
+    path(r'delete_appointment/(?P<pk>\d+)/', views.delete_appointment, name='delete_appointment'),
 
 
 ]

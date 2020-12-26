@@ -32,14 +32,23 @@
                 {% for appointment in today_appoint %}
                 <tr>
                 {% if user.is_normal %}
-                    <td>{{ appointment.appointment_to }}</td>
+                    <td><a href="{% url 'view_professionals_profile' appointment.appointment_to_id %}">{{ appointment.appointment_to }}</a></td>
                 {% else %}
-                    <td>{{ appointment.appointment_from }}</td>
+                    <td><a href="{% url 'view_professionals_profile' appointment.appointment_from_id %}">{{ appointment.appointment_from }}</a></td>
                 {% endif %}
                     <td>{{ appointment.title }}</td>
                     <td>{{ appointment.start_time }}-{{ appointment.end_time }}</td>
                     <td>{{ appointment.status }}</td>
-                    <td></td>
+                    {% if appointment.status == "Pending" %}
+                    <td class="align-middle">
+                        <a class="btn btn-success" href="{% url 'update_appointment' appointment.pk %}" aria-label="Done"><i class="fa fa-check" aria-hidden="true"></i></a>
+                        <a class="btn btn-warning" href="{% url 'canceled_appointment' appointment.pk %}" aria-label="Canceled"><i class="fa  fa-times" aria-hidden="true"></i></a>
+                        <a class="btn btn-danger" href="{% url 'delete_appointment' appointment.pk %}" aria-label="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    {% else %}
+                    <td class="align-middle">
+                        <a class="btn btn-info" href="{% url 'update_appointment' appointment.pk %}" aria-label="Pending"><i class="fa  fa-hourglass-half" aria-hidden="true"></i></a>
+                        <a class="btn btn-danger" href="{% url 'delete_appointment' appointment.pk %}" aria-label="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>
@@ -64,14 +73,23 @@
                 {%for appointment in appointments%}
                 <tr>
                     {% if user.is_normal %}
-                    <td>{{ appointment.appointment_to }}</td>
+                    <td><a href="{% url 'view_professionals_profile' appointment.appointment_to_id %}">{{ appointment.appointment_to }}</a></td>
                 {% else %}
-                    <td>{{ appointment.appointment_from }}</td>
+                    <td><a href="{% url 'view_professionals_profile' appointment.appointment_from_id %}">{{ appointment.appointment_from }}</a></td>
                 {% endif %}
                     <td>{{ appointment.title }}</td>
                     <td>{{ appointment.start_time }}-{{ appointment.end_time }}</td>
                     <td>{{ appointment.status }}</td>
-                    <td></td>
+                    {% if appointment.status == "Pending" %}
+            <td class="align-middle">
+                <a class="btn btn-success" href="{% url 'update_appointment' appointment.pk %}" aria-label="Done"><i class="fa fa-check" aria-hidden="true"></i></a>
+                <a class="btn btn-warning" href="{% url 'canceled_appointment' appointment.pk %}" aria-label="Canceled"><i class="fa  fa-times" aria-hidden="true"></i></a>
+                <a class="btn btn-danger" href="{% url 'delete_appointment' appointment.pk %}" aria-label="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+            {% else %}
+            <td class="align-middle">
+                <a class="btn btn-info" href="{% url 'update_appointment' appointment.pk %}" aria-label="Pending"><i class="fa  fa-hourglass-half" aria-hidden="true"></i></a>
+                <a class="btn btn-danger" href="{% url 'delete_appointment' appointment.pk %}" aria-label="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+            {% endif %}
                 </tr>
                 {%endfor%}
             </tbody>

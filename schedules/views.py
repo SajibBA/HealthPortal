@@ -269,3 +269,27 @@ def appointment_view(request):
         "today_appoint": today_appoint
     }
     return render(request, 'appointment/appointment_view.html', context)
+
+
+def update_appointment(request, pk):
+    appointments = get_object_or_404(Appointments, pk=pk)
+    if appointments.status == 'Pending':
+        appointments = Appointments.objects.filter(pk=pk).update(status='Done')
+    else:
+        appointments = Appointments.objects.filter(pk=pk).update(status='Pending')
+    return redirect("appointment_view")
+
+
+def canceled_appointment(request, pk):
+    appointments = get_object_or_404(Appointments, pk=pk)
+    if appointments.status == 'Pending':
+        appointments = Appointments.objects.filter(pk=pk).update(status='Canceled')
+    else:
+        appointments = Appointments.objects.filter(pk=pk).update(status='Pending')
+    return redirect("appointment_view")
+
+
+def delete_appointment(request, pk):
+    appointments = get_object_or_404(Appointments, pk=pk)
+    appointments.delete()
+    return redirect("appointment_view")
