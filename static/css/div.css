@@ -7,13 +7,12 @@
 }
 
 
-.wrapper_new{
+.wrapper-new{
     // width: 1000px;
     width:600px;
     overflow-y:scroll;
     position:relative;
-    height: 300px;
-}
+    height: 600px;
 
 
 

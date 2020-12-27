@@ -141,7 +141,7 @@ def create_appointment_schedule(request):
             end_time=end_time
         )
         messages.success(request, 'Appoint Schedule Successfully Created!')
-        return HttpResponseRedirect(reverse('profile_home'))
+        return HttpResponseRedirect(reverse('view_appointment_schedule'))
     return render(request, 'appointment/create_appointment_schedule.html', {'form': form})
 
 def view_appointment_schedule(request):
@@ -206,6 +206,43 @@ def appointment_day(request, pk, **kwargs):
         person = Person.objects.get(pk=pk)
     except Person.DoesNotExist:
         raise Http404
+    appointment_schedule_list = AppointmentSchedule.objects.filter(creator=person)
+    sat = 0
+    sun = 0
+    mon = 0
+    tue = 0
+    wed = 0
+    thus = 0
+    fri = 0
+    for appoint in appointment_schedule_list:
+        if appoint.day == 'Saturday':
+            if sat == 0:
+                sat = 1
+            sat = sat + 1
+        elif appoint.day == 'Sunday':
+            if sun == 0:
+                sun = 1
+            sun = sun + 1
+        elif appoint.day == 'Monday':
+            if mon == 0:
+                mon = 1
+            mon = mon + 1
+        elif appoint.day == 'Tuesday':
+            if tue == 0:
+                tue = 1
+            tue = tue + 1
+        elif appoint.day == 'Wednesday':
+            if wed == 0:
+                wed = 1
+            wed = wed + 1
+        elif appoint.day == 'Thursday':
+            if thus == 0:
+                thus = 1
+            thus = thus + 1
+        elif appoint.day == 'Friday':
+            if fri == 0:
+                fri = 1
+            fri = fri + 1
     form_date = AppointmentDatePickerForm(request.POST or None)
     if request.POST and form_date.is_valid():
         if '_date' in request.POST:
@@ -215,14 +252,27 @@ def appointment_day(request, pk, **kwargs):
             appointment_list = Appointments.objects.filter(appointment_to=person, date=date_of_appointment)
             day_of_appointment = day_of_appointment.strftime('%A')
             context = {'person': person, 'date_of_appointment': date_of_appointment,
-                       'appointment_schedule': appointment_schedule, 'day_of_appointment': day_of_appointment,
-                       'form_date': form_date, 'appointment_list': appointment_list}
+                       'appointment_schedule': appointment_schedule,
+                       'day_of_appointment': day_of_appointment,
+                       'form_date': form_date, 'appointment_list': appointment_list,
+                       'appointment_schedule_list': appointment_schedule_list, 'sat': sat, 'sun': sun, 'mon': mon, 'tue': tue,
+                       'wed': wed,
+                       'thus': thus, 'fri': fri
+                       }
             return render(request, 'appointment/appointment_day.html', context)
         else:
-            context = {'person': person, 'form_date': form_date}
+            context = {'person': person, 'form_date': form_date,
+                       'appointment_schedule_list': appointment_schedule_list, 'sat': sat, 'sun': sun, 'mon': mon, 'tue': tue,
+                       'wed': wed,
+                       'thus': thus, 'fri': fri
+                       }
             return render(request, 'appointment/appointment_day.html', context)
     else:
-        context = {'person': person, 'form_date': form_date}
+        context = {'person': person, 'form_date': form_date,
+                   'appointment_schedule_list': appointment_schedule_list, 'sat': sat, 'sun': sun, 'mon': mon, 'tue': tue,
+                   'wed': wed,
+                   'thus': thus, 'fri': fri
+                   }
         return render(request, 'appointment/appointment_day.html', context)
 
 

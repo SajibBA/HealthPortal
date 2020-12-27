@@ -26,8 +26,8 @@
 </form>
 
 <div class="row">
-        <div class="col-12">
-            <div class="col-12">
+        <div class="col-sm-6">
+            <div class="col-sm-6">
                 Date : {{ date_of_appointment }} {{ day_of_appointment }}
                 <h3>Available Slots</h3>
                 {% for schedule in appointment_schedule %}
@@ -49,6 +49,104 @@
 
                  Choose Slot
             </div>
+        </div>
+   <div class="col-sm-6">
+
+<h4>Weekly slots</h4>
+        <div id="schedule">
+              <table class="table">
+        <thead class="thead-inverse">
+        </thead>
+          <tr>
+              <thread class="thead-inverse">
+                  <th></th>
+                  <th>Start Time</th>
+                  <th>End Time</th>
+              </thread>
+          </tr>
+        <tbody>
+        {% if sat %}
+        <th class="align-middle" rowspan="{{ sat }}">Saturday</th>
+        {% for schedule in appointment_schedule_list %}
+            {% if schedule.day == "Saturday" %}
+            <tr>
+                <td class="align-middle">{{ schedule.start_time }}</td>
+                <td class="align-middle">{{ schedule.end_time }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% if sun %}
+        <th class="align-middle" rowspan="{{ sun }}">Sunday</th>
+        {% for schedule in appointment_schedule_list %}
+            {% if schedule.day == "Sunday" %}
+            <tr>
+                <td class="align-middle">{{ schedule.start_time }}</td>
+                <td class="align-middle">{{ schedule.end_time }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% if mon %}
+        <th class="align-middle" rowspan="{{ mon }}">Monday</th>
+        {% for schedule in appointment_schedule_list %}
+            {% if schedule.day == "Monday" %}
+            <tr>
+                <td class="align-middle">{{ schedule.start_time }}</td>
+                <td class="align-middle">{{ schedule.end_time }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% if tue %}
+        <th class="align-middle" rowspan="{{ tue }}">Tuesday</th>
+        {% for schedule in appointment_schedule_list %}
+            {% if schedule.day == "Tuesday" %}
+            <tr>
+                <td class="align-middle">{{ schedule.start_time }}</td>
+                <td class="align-middle">{{ schedule.end_time }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% if wed %}
+        <th class="align-middle" rowspan="{{ wed }}">Wednesday</th>
+        {% for schedule in appointment_schedule_list %}
+            {% if schedule.day == "Wednesday" %}
+            <tr>
+                <td class="align-middle">{{ schedule.start_time }}</td>
+                <td class="align-middle">{{ schedule.end_time }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% if thus %}
+        <th class="align-middle" rowspan="{{ thus }}">Thursday</th>
+        {% for schedule in appointment_schedule_list %}
+            {% if schedule.day == "Thursday" %}
+            <tr>
+                <td class="align-middle">{{ schedule.start_time }}</td>
+                <td class="align-middle">{{ schedule.end_time }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% if fri %}
+        <th class="align-middle" rowspan="{{ fri }}">Friday</th>
+        {% for schedule in appointment_schedule_list %}
+            {% if schedule.day == "Friday" %}
+            <tr>
+                <td class="align-middle">{{ schedule.start_time }}</td>
+                <td class="align-middle">{{ schedule.end_time }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        </tbody>
+      </table>
+        </div>
+
+
         </div>
     </div>
 
