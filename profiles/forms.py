@@ -182,3 +182,14 @@ class RatingForm(ModelForm):
             'rating',
             'review',
         ]
+
+
+class FeedbackForm(ModelForm):
+
+    class Meta:
+        model = Feedback
+        fields = [
+            'type',
+            'priority',
+
+        ]

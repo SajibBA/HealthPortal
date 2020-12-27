@@ -3,7 +3,7 @@
 {% block breadcrumb %}
      {% if user.is_authenticated %}
 
-<li class="breadcrumb-item"><a href="{% url 'appointment_view' %}" class="btn btn-student btn-lg" role="button">View Appointments</a></li>
+<li class="breadcrumb-item"><a href="{% url 'appointment_view' %}" class="btn btn-student btn-lg" role="button">View Appointments<span class="badge">{{flag_appointment}}</span></a></li>
 <li class="breadcrumb-item"><a href="{% url 'view_chatroom' %}" class="btn btn-student btn-lg" role="button">Chat rooms</a></li>
   <li class="breadcrumb-item"><a href="{% url 'calendar' %}" class="btn btn-student btn-lg" role="button">calendar<i class="fa fa-calendar fa-1x" style="color:black" aria-hidden="true"></i></a></li>
             {% if flag %}
@@ -29,9 +29,23 @@
 <div id="main">
 
    <h2>Hello! {{ user.username }}</h2>
-<div class="row">
- <div class="col-sm-8">
 
+
+<div class="row">
+ <div class="col-sm-8.5">
+    <!-- Column -->
+     {% if user.is_professional %}
+        <div class="col-xs-9 col-md-7">
+            <div class="card-hover">
+                    <div class="text-center" style="background-color:;color:black;padding:10px;">
+                        <h1 class="font-light text-white"></h1>
+                        <h1 class="text-black">{{ final_rating }}/5</h1>
+                        <h6 class="text-black">Rating</h6>
+                    </div>
+                </div>
+        </div>
+     {% endif %}
+        <!-- Column -->
 
      <button type="button" class="btn btn-info btn-block" onClick="Health()">
             Latest Health related news
@@ -142,6 +156,31 @@ rssfeed_cache = "d7c92de107b8accb3bb5ecd060434f64";
 
 
  </div>
+    {% if user.is_professional %}
+    <div class=class="col-sm-8" >
+            <button type="button" onClick="Reviews()" class="btn btn-info btn-block">
+            Reviews
+            </button>
+        <br/>
+        <div id="reviews">
+            <div style=" // width: 1000px;
+    width:300px;
+    overflow-y:scroll;
+    position:relative;
+    height: 600px;">
+                <p>
+                    {% for rev in reviews %}
+                    <div class="panel panel-warning">
+                      <div class="panel-heading"><span class="label label-info" style="">{{ rev.rate_from }}</span> {{ rev.rating }}/5</div>
+                      <div class="panel-body">{{ rev.review }}</div>
+                    </div>
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+        </div>
+    {% endif %}
+
 </div>
 </div>
 {% include "sidebar_base.html" %}
@@ -157,6 +196,10 @@ rssfeed_cache = "d7c92de107b8accb3bb5ecd060434f64";
 
         function Covid() {
             toggler('covid');
+        }
+
+        function Reviews() {
+            toggler('reviews');
         }
 
 

@@ -65,6 +65,7 @@
                 <th>Client</th>
             {% endif %}
                 <th>Title</th>
+                <th>Date</th>
                 <th>Time</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -78,6 +79,7 @@
                     <td><a href="{% url 'view_professionals_profile' appointment.appointment_from_id %}">{{ appointment.appointment_from }}</a></td>
                 {% endif %}
                     <td>{{ appointment.title }}</td>
+                    <td>{{ appointment.date }}</td>
                     <td>{{ appointment.start_time }}-{{ appointment.end_time }}</td>
                     <td>{{ appointment.status }}</td>
                     {% if appointment.status == "Pending" %}

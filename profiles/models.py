@@ -55,3 +55,25 @@ class Ratings(models.Model):
         (5, 'Very Good'),
     )
     rating = models.IntegerField(max_length=1, choices=RATE_CHOICES)
+
+
+class Feedback(models.Model):
+    message_details = models.TextField(max_length=4000)
+    feedback_from = models.ForeignKey(Person, related_name='feedback_from', on_delete=models.CASCADE,)
+    sent_at = models.DateTimeField(auto_now_add=True)
+    mark_as_read = models.BooleanField(default=False)
+    mark_as_solved = models.BooleanField(default=False)
+    TYPE_CHOICES = (
+        ("Feedback", 'Help'),
+        ("Feedback", 'Feedback'),
+        ("Report", 'Report'),
+    )
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+    PRIO_CHOICES = (
+        (1, 'Very Low'),
+        (2, 'Low'),
+        (3, 'Medium'),
+        (4, 'High'),
+        (5, 'Very High'),
+    )
+    priority = models.IntegerField(choices=PRIO_CHOICES)

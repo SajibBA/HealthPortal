@@ -16,8 +16,9 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.decorators import method_decorator
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
+from datetime import datetime as date
 
-from schedules.models import AppointmentSchedule
+from schedules.models import AppointmentSchedule, Appointments
 from .filters import *
 
 from .decorators import *
@@ -36,8 +37,13 @@ def profile(request):
 
 def profile_home(request):
     message = Message.objects.filter(sent_to=request.user)
+    if request.user.is_normal:
+        appointment = Appointments.objects.filter(appointment_from=request.user, date=date.today())
+    else:
+        appointment = Appointments.objects.filter(appointment_to=request.user, date=date.today())
     flag = 0
     flag2 = 0
+    flag_appointment = 0
     for messa in message:
         if messa.mark_as_read == 0:
             flag = 1
@@ -45,7 +51,24 @@ def profile_home(request):
     for mess in message:
         if mess.mark_as_read == 0:
             flag2 = flag2 + 1
-    context = {'flag': flag, 'flag2': flag2}
+    for app in appointment:
+        if app.status == 'Pending':
+            flag_appointment = flag_appointment + 1
+
+    ratings = Ratings.objects.filter(rate_to=request.user)
+    rates = 0
+    rater = 0
+    for rate in ratings:
+        rater = rater + 1
+        rates = rates + rate.rating
+    try:
+        final_rating = rates / rater
+    except ZeroDivisionError:
+        final_rating = 0
+    final_rating = round(final_rating, 2)
+    reviews = Ratings.objects.filter(rate_to=request.user)
+    context = {'flag': flag, 'flag2': flag2, 'flag_appointment': flag_appointment,
+               'final_rating': final_rating, 'reviews': reviews}
     return render(request, 'profile_home.html', context)
 
 
@@ -272,3 +295,23 @@ def delete_message(request, pk):
     message.delete()
     return redirect("view_messages")
 
+
+def feedback(request):
+    form = FeedbackForm(request.POST or None)
+    if request.POST and form.is_valid():
+        message_details = request.POST['message_details']
+        feedback_from = request.user
+        type = form.cleaned_data['type']
+        priority = form.cleaned_data['priority']
+        feed = Feedback.objects.create(
+            message_details=message_details,
+            feedback_from=feedback_from,
+            type=type,
+            priority=priority,
+        )
+        context = {'feed': feed, 'form': form}
+        messages.success(request, 'Thanks for your valuable feedback/report ')
+        return render(request, 'profile_home.html', context)
+    else:
+        context = {'form': form}
+        return render(request, 'feedback.html', context)

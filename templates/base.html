@@ -11,6 +11,23 @@
          background-size: cover;
         }
 
+
+      * {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+.wrapperbase {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -100px; /* the bottom margin is the negative value of the footer's height */
+}
+.footer, .push {
+    height: 100px; /* .push must be the same height as .footer */
+}
+
 </style>
 
 
@@ -39,14 +56,10 @@
  <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
      {% if user.is_authenticated %}
-<a href="{% url 'appointment_view' %}" class="btn btn-student btn-lg" role="button">View Appointments</a>
+<a href="{% url 'appointment_view' %}" class="btn btn-student btn-lg" role="button">View Appointments<span class="badge">{{flag_appointment}}</span></a>
 <a href="{% url 'view_chatroom' %}" class="btn btn-student btn-lg" role="button">Chat rooms</a>
 <a href="{% url 'calendar' %}" class="btn btn-student btn-lg" role="button">calendar<i class="fa fa-calendar fa-1x" style="color:black" aria-hidden="true"></i></a>
-            {% if flag %}
-<a href="{% url 'view_messages' %}" class="btn btn-student btn-lg" role="button">messages<span class="badge">{{flag2}}</span><i class="fa fa-envelope fa-1x" style="color:PeachPuff " aria-hidden="true"></i><i class="fa fa-bell-o" style="color:red" aria-hidden="true"></i></a>
-            {% else %}
 <a href="{% url 'view_messages' %}" class="btn btn-student btn-lg" role="button">messages<span class="badge">{{flag2}}</span><i class="fa fa-envelope fa-1x" style="color:PeachPuff" aria-hidden="true"></i></a>
-            {% endif %}
 {% if user.is_normal %}
 <a href="{% url 'view_professionals' %}" class="btn btn-student btn-lg" role="button">View Professionals</a>
 
@@ -60,6 +73,9 @@
     {% endif %}
 </div>
   {% include "sidebar_base.html" %}
+
+<div class="wrapperbase">
+
 {% block body %}
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container">
@@ -122,9 +138,23 @@
   </div>
 
 {% endblock body %}
+
+<div class="push"></div>
+</div>
+
     <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/app.js' %}"></script>
   </body>
+  <footer>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <div class="container">
+  <a class="navbar-brand" href="#">Author: Sajib Biswas<br>
+</a>
+    <a class="navbar-brand" href="{% url 'feedback' %}">Help?/Report/Feedback<br>
+</a>
+  </div>
+    </nav>
+</footer>
 </html>

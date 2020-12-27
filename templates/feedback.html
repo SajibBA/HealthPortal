@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Message</li>
+  <li class="breadcrumb-item"><a href="{% url 'profile_home' %}"><button class="btn"><i class="fa fa-home"></i> Home</button></a></li>
+  <li class="breadcrumb-item"><button class="btn" onClick="javascript:history.go(-1);">&#9756;Back</button></li>
+{% endblock %}
+
+{% block content %}
+   <h2>Write to Us!</h2>
+
+{% if message %}
+<center>
+    <h3> {{ message }} !! </h3>
+</center>
+<br/><br/>
+{% else %}
+
+{% endif %}
+
+<form action="{% url 'feedback' %}" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <table class="form form-table">
+    {{ form }}
+        </table>
+        <div class="col-12">
+            <textarea name="message_details" class="form-control mb-30" placeholder="Your message"></textarea>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn dento-btn">Send Message</button>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}
