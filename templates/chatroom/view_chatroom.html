@@ -3,6 +3,11 @@
 {% block breadcrumb %}
   <li class="breadcrumb-item active">Chatrooms</li>
   <li class="breadcrumb-item"><a href="{% url 'profile_home' %}"><button class="btn"><i class="fa fa-home"></i> Home</button></a></li>
+{% if user.is_normal %}
+{% elif user.is_professional %}
+<li class="breadcrumb-item"><a href="{% url 'create_chatroom' %}"><button class="btn"><i class="fa fa-comments"></i>Create a new chat room</button></a></li>
+
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -34,8 +39,16 @@
             <td class="align-middle"><a href="{% url 'live_chatroom' chat.id %}">{{ chat.title }}</a></td>
           {% endif %}
             <td class="align-middle">{{ chat.description }}</td>
-            <td class="align-middle">{{ chat.is_anonymous_supported }}</td>
-            <td class="align-middle">{{ chat.is_private }}</td>
+          {% if chat.is_anonymous_supported %}
+          <td class="align-middle"><i class="fa fa-check"></i></td>
+          {% else %}
+            <td class="align-middle"><i class="fa fa-times"></i></td>
+          {% endif %}
+          {% if chat.is_private %}
+            <td class="align-middle"><i class="fa fa-lock"></i></td>
+          {% else %}
+            <td class="align-middle"><i class="fa fa-unlock-alt"></i></td>
+          {% endif %}
             <td class="align-middle">{{ chat.creator }}</td>
         </tr>
       {% endfor %}

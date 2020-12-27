@@ -3,7 +3,34 @@
 
 
 {% block content %}
-   <h2>Join {{ chat_room.title }} as </h2>
-  <a href="{% url 'live_chatroom' chat_room.pk %}" class="btn btn-student btn-lg" role="button">Myself</a>
-  <a href="{% url 'anonymous_chatroom' chat_room.pk %}" class="btn btn-teacher btn-lg" role="button">Anonymous</a>
-{% endblock %}
+
+ <div class="container-fluid">
+                <div class="row">
+                    <h2>Join {{ chat_room.title }} as </h2>
+                    <br/>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="hover">
+                            <a href="{% url 'live_chatroom' chat_room.pk %}">
+                            <div class="text-center" style="background-color:silver;color:black;padding:10px;">
+                                <h1 class="font-light text-white">{% load static %}<img src="{% static 'images/yourself.png' %}"><i class="mdi mdi-view-dashboard"></i></h1>
+                                <h1 class="text-white">Myself</h1>
+                            </div>
+                                </a>
+                        </div>
+                    </div>
+                     <!-- Column -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="hover">
+                            <a href="{% url 'anonymous_chatroom' chat_room.pk %}">
+                            <div class="text-center" style="background-color:silver;color:black;padding:10px;">
+                                <h1 class="font-light text-white">{% load static %}<img src="{% static 'images/anonymous.png' %}"><i class="mdi mdi-view-dashboard"></i></h1>
+                                <h1 class="text-white">Anonymous</h1>
+                            </div>
+                                </a>
+                        </div>
+                    </div>
+                     <!-- Column -->
+                </div>
+ </div>
+   {% endblock %}

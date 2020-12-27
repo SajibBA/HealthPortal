@@ -3,8 +3,36 @@
 
 
 {% block content %}
-   <h2>Sign up for a free account</h2>
-  <p class="lead">Select below the type of account you want to create</p>
-  <a href="{% url 'normal_signup' %}" class="btn btn-student btn-lg" role="button">Normal</a>
-  <a href="{% url 'professional_signup' %}" class="btn btn-teacher btn-lg" role="button">Professional</a>
+<div class="container-fluid">
+    <h2>Sign up for a free account</h2>
+                    <br/>
+                <div class="row">
+
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-6">
+                        <div class="hover">
+                            <a href="{% url 'normal_signup' %}">
+                            <div class="text-center" style="background-color:NavajoWhite;color:black;padding:10px;">
+                                <h1 class="font-light text-white">{% load static %}<img src="{% static 'images/man(p).png' %}"><i class="mdi mdi-view-dashboard"></i></h1>
+                                <h1 class="text-black">Normal</h1>
+                                <h6 class="text-white">(</h6>
+                            </div>
+                                </a>
+                        </div>
+                    </div>
+                     <!-- Column -->
+                    <div class="col-md-6 col-lg-6">
+                        <div class="hover">
+                            <a href="{% url 'professional_signup' %}">
+                            <div class="text-center" style="background-color:RebeccaPurple;color:black;padding:10px;">
+                                <h1 class="font-light text-white">{% load static %}<img src="{% static 'images/male_health_worker(p).png' %}"><i class="mdi mdi-view-dashboard"></i></h1>
+                                <h1 class="text-white">Professional</h1>
+                                <h6 class="text-white">(Doctor/Therapist/etc..)</h6>
+                            </div>
+                                </a>
+                        </div>
+                    </div>
+                     <!-- Column -->
+                </div>
+ </div>
 {% endblock %}

@@ -27,7 +27,7 @@ def create_chatroom(request):
             is_private=is_private,
             password=password,
         )
-        return HttpResponseRedirect(reverse('profile_home'))
+        return HttpResponseRedirect(reverse('view_chatroom'))
     return render(request, 'chatroom/create_chatroom.html', {'form': form})
 
 
