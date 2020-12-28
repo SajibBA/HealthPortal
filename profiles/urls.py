@@ -27,6 +27,13 @@ urlpatterns = [
     path(r'update_message/(?P<pk>\d+)/', views.update_message, name='update_message'),
     path(r'delete_message/(?P<pk>\d+)/', views.delete_message, name='delete_message'),
     path(r'feedback/', views.feedback, name='feedback'),
+    path(r'add_achievements/', views.add_achievements,
+         name='add_achievements'),
+    path(r'view_achievements/', views.view_achievements, name='view_achievements'),
+    path(r'achievements/edit/<int:pk>/', views.AchievementsEdit.as_view(),
+         name='achievements_edit'),
+    path(r'delete_achievements/(?P<pk>\d+)/', views.delete_achievements,
+         name='delete_achievements'),
 
 ]
 

@@ -16,6 +16,7 @@
 
 {% elif user.is_professional %}
   <li class="breadcrumb-item"><a href="{% url 'view_appointment_schedule' %}" class="btn btn-student btn-lg" role="button">Appointment Schedules</a></li>
+<li class="breadcrumb-item"><a href="{% url 'view_achievements' %}" class="btn btn-student btn-lg" role="button">Achievements</a></li>
 
 {% endif %}
     {% endif %}
@@ -170,9 +171,15 @@ rssfeed_cache = "d7c92de107b8accb3bb5ecd060434f64";
     height: 600px;">
                 <p>
                     {% for rev in reviews %}
-                    <div class="panel panel-warning">
-                      <div class="panel-heading"><span class="label label-info" style="">{{ rev.rate_from }}</span> {{ rev.rating }}/5</div>
-                      <div class="panel-body">{{ rev.review }}</div>
+                <!-- Left-aligned -->
+                    <div class="media">
+                      <div class="media-left">
+                        <img src="/media/{{ rev.rate_from.profile_pic }}"  style="width:60px">
+                      </div>
+                      <div class="media-body">
+                          <h4 class="media-heading">{{ rev.rate_from }}<sub>{{ rev.rating }}/5</sub></h4><sup>{{ rev.rate_time }}</sup>
+                        <p>{{ rev.review }}</p>
+                      </div>
                     </div>
                     {% endfor %}
                 </p>

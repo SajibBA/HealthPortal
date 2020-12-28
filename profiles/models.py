@@ -47,6 +47,7 @@ class Ratings(models.Model):
     review = models.TextField(max_length=4000)
     rate_from = models.ForeignKey(Person, related_name='rate_from', on_delete=models.CASCADE,)
     rate_to = models.ForeignKey(Person, related_name='rate_to', on_delete=models.CASCADE,)
+    rate_time = models.DateTimeField(auto_now_add=True)
     RATE_CHOICES = (
         (1, 'Very Bad'),
         (2, 'Bad'),
@@ -54,7 +55,7 @@ class Ratings(models.Model):
         (4, 'Good'),
         (5, 'Very Good'),
     )
-    rating = models.IntegerField(max_length=1, choices=RATE_CHOICES)
+    rating = models.IntegerField(choices=RATE_CHOICES)
 
 
 class Feedback(models.Model):
@@ -77,3 +78,14 @@ class Feedback(models.Model):
         (5, 'Very High'),
     )
     priority = models.IntegerField(choices=PRIO_CHOICES)
+
+
+class Achievements(models.Model):
+    holder = models.ForeignKey(Person, related_name='holder', on_delete=models.CASCADE,)
+    title = models.CharField(max_length=100)
+    details = models.TextField()
+    achievement_pic = models.ImageField(upload_to='pics/', null=True, blank=True)
+
+    def __str__(self):
+        return self.person.username
+

@@ -144,6 +144,7 @@ def create_appointment_schedule(request):
         return HttpResponseRedirect(reverse('view_appointment_schedule'))
     return render(request, 'appointment/create_appointment_schedule.html', {'form': form})
 
+
 def view_appointment_schedule(request):
     appointment_schedule = AppointmentSchedule.objects.filter(creator=request.user)
     sat = 0

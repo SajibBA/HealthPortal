@@ -193,3 +193,15 @@ class FeedbackForm(ModelForm):
             'priority',
 
         ]
+
+
+class AchievementsForm(ModelForm):
+
+    class Meta:
+        model = Achievements
+        fields = [
+            'title',
+            'details',
+            'achievement_pic',
+
+        ]

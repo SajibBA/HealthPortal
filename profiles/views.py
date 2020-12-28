@@ -16,6 +16,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.decorators import method_decorator
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
+from django.views import generic
 from datetime import datetime as date
 
 from schedules.models import AppointmentSchedule, Appointments
@@ -72,6 +73,9 @@ def profile_home(request):
     return render(request, 'profile_home.html', context)
 
 
+# Registration and login------------
+
+
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
 
@@ -110,6 +114,9 @@ class ProfessionalSignUpView(SuccessMessageMixin, CreateView):
         return redirect('home')
 
 
+# Profile edit------------
+
+
 class NormalProfileEditView(SuccessMessageMixin, UpdateView):
     form_class = NormalProfileEditForm
     template_name = 'registration/edit_profile.html'
@@ -129,12 +136,16 @@ class ProfessionalProfileEditView(SuccessMessageMixin, UpdateView):
     def get_object(self):
         return self.request.user
 
+# Password Change------------
+
 
 class ProfilePasswordChangeView(SuccessMessageMixin, PasswordChangeView):
     form_class = PasswordChangeForm
     template_name = 'registration/change_password.html'
     success_url = reverse_lazy('profile_home')
 
+
+# View others profile------------
 
 
 def view_professionals(request):
@@ -204,6 +215,7 @@ def view_professionals_profile(request, pk):
     rate_to = person
     given_rating = Ratings.objects.filter(rate_from=rate_from, rate_to=rate_to)
     reviews = Ratings.objects.filter(rate_to=rate_to)
+    achievements = Achievements.objects.filter(holder=person)
     if request.POST and form_rate.is_valid():
         if '_rate' in request.POST:
             rating = request.POST['rating']
@@ -225,19 +237,22 @@ def view_professionals_profile(request, pk):
             context = {'appointment_schedule': appointment_schedule, 'sat': sat, 'sun': sun, 'mon': mon, 'tue': tue,
                        'wed': wed,
                        'thus': thus, 'fri': fri, 'person': person, 'final_rating': final_rating, 'rater': rater,
-                       'given_rating': given_rating, 'reviews': reviews}
+                       'given_rating': given_rating, 'reviews': reviews,
+                       "achievements": achievements}
             return render(request, 'view_professionals_profile.html', context)
         else:
             context = {'appointment_schedule': appointment_schedule, 'sat': sat, 'sun': sun, 'mon': mon, 'tue': tue,
                        'wed': wed,
                        'thus': thus, 'fri': fri, 'person': person, 'final_rating': final_rating, 'rater': rater,
-                       'form_rate': form_rate, 'reviews': reviews}
+                       'form_rate': form_rate, 'reviews': reviews,
+                       "achievements": achievements}
             return render(request, 'view_professionals_profile.html', context)
     else:
         context = {'appointment_schedule': appointment_schedule, 'sat': sat, 'sun': sun, 'mon': mon, 'tue': tue,
                    'wed': wed,
                    'thus': thus, 'fri': fri, 'person': person, 'final_rating': final_rating, 'rater': rater,
-                   'form_rate': form_rate, 'reviews': reviews}
+                   'form_rate': form_rate, 'reviews': reviews,
+                   "achievements": achievements}
         return render(request, 'view_professionals_profile.html', context)
 
 
@@ -295,6 +310,8 @@ def delete_message(request, pk):
     message.delete()
     return redirect("view_messages")
 
+# Feedbacks------------
+
 
 def feedback(request):
     form = FeedbackForm(request.POST or None)
@@ -315,3 +332,42 @@ def feedback(request):
     else:
         context = {'form': form}
         return render(request, 'feedback.html', context)
+
+
+# Achievements------------
+
+def add_achievements(request):
+    form = AchievementsForm(request.POST, request.FILES or None)
+    if request.POST and form.is_valid():
+        title = form.cleaned_data['title']
+        details = form.cleaned_data['details']
+
+        Achievements.objects.get_or_create(
+            holder=request.user,
+            title=title,
+            details=details,
+            achievement_pic=form.cleaned_data['achievement_pic']
+        )
+        messages.success(request, 'Achievements Successfully Added!')
+        return HttpResponseRedirect(reverse('view_achievements'))
+    return render(request, 'add_achievements.html', {'form': form})
+
+
+def view_achievements(request):
+    achievements = Achievements.objects.filter(holder=request.user)
+    return render(request, 'view_achievements.html', {'achievements': achievements})
+
+
+class AchievementsEdit(SuccessMessageMixin, generic.UpdateView):
+    model = Achievements
+    fields = ['title', 'details', 'achievement_pic']
+    template_name = 'add_achievements.html'
+    success_message = _('Successfully updated')
+    success_url = reverse_lazy('view_achievements')
+
+
+def delete_achievements(request, pk):
+    achievements = get_object_or_404(Achievements, pk=pk)
+    achievements.delete()
+    messages.success(request, 'Successfully Deleted!.')
+    return redirect("view_achievements")
