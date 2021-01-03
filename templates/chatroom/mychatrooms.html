@@ -6,7 +6,6 @@
 {% if user.is_normal %}
 {% elif user.is_professional %}
 <li class="breadcrumb-item"><a href="{% url 'create_chatroom' %}"><button class="btn"><i class="fa fa-comments"></i>Create a new chat room</button></a></li>
-<li class="breadcrumb-item"><a href="{% url 'mychatrooms' %}"><button class="btn"><i class="fa fa-comments"></i>My Chatrooms</button></a></li>
 
 {% endif %}
 {% endblock %}
@@ -27,6 +26,7 @@
         <th>Anonymous Supported</th>
         <th>Status</th>
         <th>Creator</th>
+          <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -51,6 +51,11 @@
             <td class="align-middle"><i class="fa fa-unlock-alt"></i></td>
           {% endif %}
             <td class="align-middle">{{ chat.creator }}</td>
+            <td>
+                <a class="btn btn-info" href="{% url 'chatroom_edit' chat.pk %}" aria-label="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+            <a class="btn btn-danger" href="{% url 'delete_chatroom' chat.pk %}" aria-label="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+
+            </td>
         </tr>
       {% endfor %}
     </tbody>

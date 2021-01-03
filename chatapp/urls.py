@@ -11,6 +11,12 @@ urlpatterns = [
     path(r'protected_chatroom/(?P<pk>\d+)/', views.protected_chatroom, name='protected_chatroom'),
     path(r'join_chatroom/(?P<pk>\d+)/', views.join_chatroom, name='join_chatroom'),
     path(r'anonymous_chatroom/(?P<pk>\d+)/', views.anonymous_chatroom, name='anonymous_chatroom'),
+    path(r'mychatrooms/', views.mychatrooms,
+         name='mychatrooms'),
+    path(r'chatroom/edit/<int:pk>/', views.ChatroomEdit.as_view(),
+         name='chatroom_edit'),
+    path(r'delete_chatroom/(?P<pk>\d+)/', views.delete_chatroom,
+         name='delete_chatroom'),
 
 
 ]

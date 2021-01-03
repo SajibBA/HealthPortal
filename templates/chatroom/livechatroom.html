@@ -42,7 +42,6 @@
                       {% if ch.sender == sender_person %}
           <div class="panel-body">{{ ch.chat_body }}</div>
                               <div class="panel-footer"><span class="label label-success " style="float: right;">{{ ch.sender }}</span><span class="label label-default " style="float: right;">{{ ch.created_date }}</span></div>
-
                       {% else %}
           <div class="panel-body">{{ ch.chat_body }}</div>
                               <div class="panel-footer"><span class="label label-info " style="float: left;">{{ ch.sender }}</span><span class="label label-default " style="float: left;">{{ ch.created_date }}</span></div>

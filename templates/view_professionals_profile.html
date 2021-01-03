@@ -20,8 +20,7 @@
  <div class="col-sm-6" style="background: rgba(255, 255, 255, 0.25);">
    <h2>{{ person.username }}</h2>
      {% if person.is_professional %}
-     <span class="stars">{{ final_rating }}</span>
-     <h5>Rating {{ final_rating }}/5 &nbsp; <sub>Raters: {{ rater }}</sub></h5>
+     <h3>Rating {{ final_rating }}/5 &nbsp; <sub>Raters: {{ rater }}</sub></h3>
      {% endif %}
     <img src="{{ person.profile_pic.url }}"  width="100px" alt="">
     <ul>
@@ -210,7 +209,7 @@
                           {% if ach.achievement_pic %}
                         <img src="/media/{{ ach.achievement_pic }}"  style="width:200px">
                           {% else %}
-                          {% load static %}<img src="{% static 'images/achievement.png' %}"style="width:50px">
+                          {% load static %}<img src="{% static 'images/star_achievement.jpg' %}"style="width:50px">
                           {% endif %}
                       </div>
                       <div class="media-body">

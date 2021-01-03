@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 from pyexpat.errors import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import get_object_or_404
@@ -5,6 +6,8 @@ from django.contrib import messages
 
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect, reverse
+from django.views import generic
+from django.utils.translation import ugettext_lazy as _
 
 # Create your views here.
 from chatapp.filters import *
@@ -118,3 +121,26 @@ def anonymous_chatroom(request, pk):
         context = {'chat_room': chat_room, 'chat_all': chat_all,
                    'live_person': live_person}
         return render(request, 'chatroom/anonymous_chatroom.html', context)
+
+
+def mychatrooms(request):
+    chatroom = Chatroom.objects.filter(creator=request.user)
+    myFilter = ChatroomFilter(request.GET, queryset=chatroom)
+    chatroom = myFilter.qs
+    context = {'chatroom': chatroom, 'myFilter': myFilter}
+    return render(request, 'chatroom/mychatrooms.html', context)
+
+
+class ChatroomEdit(SuccessMessageMixin, generic.UpdateView):
+    model = Chatroom
+    fields = ['title', 'description', 'is_anonymous_supported', 'is_private', 'password']
+    template_name = 'chatroom/create_chatroom.html'
+    success_message = _('Successfully updated')
+    success_url = reverse_lazy('mychatrooms')
+
+
+def delete_chatroom(request, pk):
+    chatroom = get_object_or_404(Chatroom, pk=pk)
+    chatroom.delete()
+    messages.success(request, 'Successfully Deleted!.')
+    return redirect("mychatrooms")

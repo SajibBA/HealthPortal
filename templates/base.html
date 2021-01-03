@@ -65,6 +65,7 @@ html, body {
 
 {% elif user.is_professional %}
 <a href="{% url 'view_appointment_schedule' %}" class="btn btn-student btn-lg" role="button">Appointment Schedules</a>
+   <a href="{% url 'view_achievements' %}" class="btn btn-student btn-lg" role="button">Achievements</a>
 
 {% endif %}
    {% else %}
@@ -150,7 +151,7 @@ html, body {
   <footer>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container">
-  <a class="navbar-brand" href="#">Author: Sajib Biswas<br>
+  <a class="navbar-brand" href="#">Developed By: Sajib Biswas<br>
 </a>
     <a class="navbar-brand" href="{% url 'feedback' %}">Help?/Report/Feedback<br>
 </a>
