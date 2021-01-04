@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block breadcrumb %}
+<li class="breadcrumb-item active"><h5>Add About</h5></li>
+  <li class="breadcrumb-item"><a class="btn btn-info left" href="{% url 'profile_home' %}"><i class="fa fa-home"></i> Home</a></li>
+<li class="breadcrumb-item"><a class="btn btn-info left" href="{% url 'profile' %}">My Profile</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="clearfix">
+
+<div class="row">
+    <div class="col-md-8 col-sm-10 col-12">
+      {% if messages %}
+          <ul class="messages">
+          {% for message in messages %}
+          <li style="color:red">{{ message }}</li>
+          {% endfor %}
+          </ul>
+      {% endif %}
+      <form method="post" novalidate enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Add</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

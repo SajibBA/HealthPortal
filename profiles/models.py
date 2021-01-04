@@ -35,6 +35,11 @@ class Normal(models.Model):
         return self.person.username
 
 
+class AboutProfessional(models.Model):
+    person = models.OneToOneField(Person, on_delete=models.CASCADE, primary_key=True)
+    info = models.TextField(max_length=10000, null=True, blank=True)
+
+
 class Message(models.Model):
     message_details = models.TextField(max_length=4000)
     sent_from = models.ForeignKey(Person, related_name='sent_from', on_delete=models.CASCADE,)

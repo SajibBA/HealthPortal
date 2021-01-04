@@ -5,8 +5,8 @@
 {% block content %}
 {% load static %}
 
-<div class="container text-center">
-    <h2><em>Welcome!{{ user.username }}</em></h2>
+<div class="container text-center" style="background-color:hsla(9, 100%, 64%, 0.4);" >
+    <h2><em>Welcome!<br/>{{ user.username }}</em></h2>
 <p>
          {% if user.is_authenticated %}
   <a href="{% url 'profile_home' %}" class="btn btn-student btn-lg" role="button">Home</a>
@@ -16,7 +16,6 @@
     Already a user <a href="{% url 'login' %}" class="btn btn-student btn-lg" role="button">Login</a>
         {% endif %}
 </p>
-
 </div>
 <br/><br/>
  <div id="myCarousel" class="carousel slide" data-ride="carousel">

@@ -44,7 +44,7 @@
 
     <div class="col-sm-6">
 
-        <button onClick="Schedule()">
+        <button class="btn btn-info" onClick="Schedule()">
             Appointment Schedule
         </button>
         <br>
@@ -141,7 +141,7 @@
         </tbody>
       </table>
         </div>
-        <button onClick="Rate()">
+        <button class="btn btn-warning" onClick="Rate()">
             Rate
         </button>
         <br>
@@ -163,7 +163,7 @@
               </table>
             </form>
         </div>
-        <button onClick="Reviews()">
+        <button class="btn btn-success" onClick="Reviews()">
             Reviews
         </button>
         <br>
@@ -184,6 +184,15 @@
                     {% endfor %}
                 </p>
             </div>
+        </div>
+
+        <div id="about" style="background: rgba(155, 255, 255, 0.25);">
+            <h1>About {{ person }}</h1>
+            {% if person.aboutprofessional %}
+            <p>{{ person.aboutprofessional.info }}</p>
+            {% else %}
+            <p>No info to show</p>
+            {% endif %}
         </div>
     </div>
 {% endif %}

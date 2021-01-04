@@ -22,5 +22,18 @@
          <li>Speciality= {{ user.professional.speciality }}</li>
     </ul>
   <a href="{% url 'professional_edit_profile' %}" class="btn btn-student btn-lg" role="button">Edit Profile</a>
+
+    {% if user.aboutprofessional %}
+    <ul>
+        <h5><b>About Myself</b> </h5>
+        <p>{{ user.aboutprofessional.info }}</p>
+          <a href="{% url 'about_edit' user.aboutprofessional.pk %}" class="btn btn-student btn-lg" role="button">Edit About</a>
+    </ul>
+    {% else %}
+    <ul>
+        <h5><b>About Myself</b> </h5>
+        <p>No info to show.  <a href="{% url 'add_about' %}" class="btn btn-student btn-lg" role="button">Add About</a></p>
+    </ul>
+    {% endif %}
     {% endif %}
 {% endblock %}

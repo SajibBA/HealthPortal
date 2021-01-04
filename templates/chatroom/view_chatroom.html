@@ -4,7 +4,7 @@
   <li class="breadcrumb-item active">Chatrooms</li>
   <li class="breadcrumb-item"><a href="{% url 'profile_home' %}"><button class="btn"><i class="fa fa-home"></i> Home</button></a></li>
 {% if user.is_normal %}
-{% elif user.is_professional %}
+{% elif user.is_professional or user.is_superuser %}
 <li class="breadcrumb-item"><a href="{% url 'create_chatroom' %}"><button class="btn"><i class="fa fa-comments"></i>Create a new chat room</button></a></li>
 <li class="breadcrumb-item"><a href="{% url 'mychatrooms' %}"><button class="btn"><i class="fa fa-comments"></i>My Chatrooms</button></a></li>
 

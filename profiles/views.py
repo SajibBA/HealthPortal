@@ -32,46 +32,6 @@ def home(request):
     return render(request, 'home.html')
 
 
-def profile(request):
-    return render(request, 'registration/profile.html')
-
-
-def profile_home(request):
-    message = Message.objects.filter(sent_to=request.user)
-    if request.user.is_normal:
-        appointment = Appointments.objects.filter(appointment_from=request.user, date=date.today())
-    else:
-        appointment = Appointments.objects.filter(appointment_to=request.user, date=date.today())
-    flag = 0
-    flag2 = 0
-    flag_appointment = 0
-    for messa in message:
-        if messa.mark_as_read == 0:
-            flag = 1
-            break
-    for mess in message:
-        if mess.mark_as_read == 0:
-            flag2 = flag2 + 1
-    for app in appointment:
-        if app.status == 'Pending':
-            flag_appointment = flag_appointment + 1
-
-    ratings = Ratings.objects.filter(rate_to=request.user)
-    rates = 0
-    rater = 0
-    for rate in ratings:
-        rater = rater + 1
-        rates = rates + rate.rating
-    try:
-        final_rating = rates / rater
-    except ZeroDivisionError:
-        final_rating = 0
-    final_rating = round(final_rating, 2)
-    reviews = Ratings.objects.filter(rate_to=request.user)
-    context = {'flag': flag, 'flag2': flag2, 'flag_appointment': flag_appointment,
-               'final_rating': final_rating, 'reviews': reviews}
-    return render(request, 'profile_home.html', context)
-
 
 # Registration and login------------
 
@@ -114,6 +74,51 @@ class ProfessionalSignUpView(SuccessMessageMixin, CreateView):
         return redirect('home')
 
 
+# Profile Homepage------------
+
+
+def profile_home(request):
+    message = Message.objects.filter(sent_to=request.user)
+    if request.user.is_normal:
+        appointment = Appointments.objects.filter(appointment_from=request.user, date=date.today())
+    else:
+        appointment = Appointments.objects.filter(appointment_to=request.user, date=date.today())
+    flag = 0                                # ---For Notifications
+    flag2 = 0
+    flag_appointment = 0
+    for messa in message:
+        if messa.mark_as_read == 0:
+            flag = 1
+            break
+    for mess in message:
+        if mess.mark_as_read == 0:
+            flag2 = flag2 + 1
+    for app in appointment:
+        if app.status == 'Pending':
+            flag_appointment = flag_appointment + 1
+
+    ratings = Ratings.objects.filter(rate_to=request.user)
+    rates = 0
+    rater = 0
+    for rate in ratings:
+        rater = rater + 1
+        rates = rates + rate.rating
+    try:
+        final_rating = rates / rater
+    except ZeroDivisionError:
+        final_rating = 0
+    final_rating = round(final_rating, 2)
+    reviews = Ratings.objects.filter(rate_to=request.user)
+    context = {'flag': flag, 'flag2': flag2, 'flag_appointment': flag_appointment,
+               'final_rating': final_rating, 'reviews': reviews, 'rater': rater}
+    return render(request, 'profile_home.html', context)
+
+
+# Profile Details------------
+
+def profile(request):
+    return render(request, 'registration/profile.html')
+
 # Profile edit------------
 
 
@@ -143,6 +148,29 @@ class ProfilePasswordChangeView(SuccessMessageMixin, PasswordChangeView):
     form_class = PasswordChangeForm
     template_name = 'registration/change_password.html'
     success_url = reverse_lazy('profile_home')
+
+
+# About person details------------
+
+def add_about(request):
+    form = AboutForm(request.POST, request.FILES or None)
+    if request.POST and form.is_valid():
+        info = form.cleaned_data['info']
+        AboutProfessional.objects.get_or_create(
+            person=request.user,
+            info=info,
+        )
+        messages.success(request, 'About Successfully Added!')
+        return HttpResponseRedirect(reverse('profile'))
+    return render(request, 'add_about.html', {'form': form})
+
+
+class AboutEdit(SuccessMessageMixin, generic.UpdateView):
+    model = AboutProfessional
+    fields = ['info']
+    template_name = 'add_about.html'
+    success_message = _('Successfully updated')
+    success_url = reverse_lazy('profile')
 
 
 # View others profile------------

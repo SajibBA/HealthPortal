@@ -34,6 +34,10 @@ urlpatterns = [
          name='achievements_edit'),
     path(r'delete_achievements/(?P<pk>\d+)/', views.delete_achievements,
          name='delete_achievements'),
+    path(r'add_about/', views.add_about,
+         name='add_about'),
+    path(r'about/edit/<int:pk>/', views.AboutEdit.as_view(),
+         name='about_edit'),
 
 ]
 

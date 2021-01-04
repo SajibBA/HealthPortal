@@ -205,3 +205,13 @@ class AchievementsForm(ModelForm):
             'achievement_pic',
 
         ]
+
+
+class AboutForm(ModelForm):
+
+    class Meta:
+        model = AboutProfessional
+        fields = [
+            'info',
+
+        ]
