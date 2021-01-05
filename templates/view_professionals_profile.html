@@ -15,14 +15,14 @@
 {% endblock %}
 {% block content %}
 
-<button type="button" onClick="window.location.reload();">Refresh</button>
+<!-- <button type="button" onClick="window.location.reload();">Refresh</button> -->
 <div class="row">
  <div class="col-sm-6" style="background: rgba(255, 255, 255, 0.25);">
    <h2>{{ person.username }}</h2>
      {% if person.is_professional %}
      <h3>Rating {{ final_rating }}/5 &nbsp; <sub>Raters: {{ rater }}</sub></h3>
      {% endif %}
-    <img src="{{ person.profile_pic.url }}"  width="100px" alt="">
+    <img src="{{ person.profile_pic.url }}"  alt="HTML5" style="width:128px;height:128px">
     <ul>
         <li>First name= {{ person.first_name }}</li>
         <li>Last name= {{ person.last_name }}</li>
@@ -189,7 +189,7 @@
         <div id="about" style="background: rgba(155, 255, 255, 0.25);">
             <h1>About {{ person }}</h1>
             {% if person.aboutprofessional %}
-            <p>{{ person.aboutprofessional.info }}</p>
+            <p><pre class="pre-scrollable">{{ person.aboutprofessional.info }}</pre></p>
             {% else %}
             <p>No info to show</p>
             {% endif %}
@@ -216,9 +216,9 @@
                     <div class="media">
                       <div class="media-left">
                           {% if ach.achievement_pic %}
-                        <img src="/media/{{ ach.achievement_pic }}"  style="width:200px">
+                        <img src="/media/{{ ach.achievement_pic }}"  alt="HTML5" style="width:200px;height:150px">
                           {% else %}
-                          {% load static %}<img src="{% static 'images/star_achievement.jpg' %}"style="width:50px">
+                          {% load static %}<img src="{% static 'images/star_achievement.jpg' %}" alt="HTML5" style="width:200px;height:150px">
                           {% endif %}
                       </div>
                       <div class="media-body">

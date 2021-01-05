@@ -56,21 +56,21 @@ html, body {
  <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
      {% if user.is_authenticated %}
-<a href="{% url 'appointment_view' %}" class="btn btn-student btn-lg" role="button">View Appointments<span class="badge">{{flag_appointment}}</span></a>
-<a href="{% url 'view_chatroom' %}" class="btn btn-student btn-lg" role="button">Chat rooms</a>
-<a href="{% url 'calendar' %}" class="btn btn-student btn-lg" role="button">calendar<i class="fa fa-calendar fa-1x" style="color:Silver" aria-hidden="true"></i></a>
-<a href="{% url 'view_messages' %}" class="btn btn-student btn-lg" role="button">messages<span class="badge">{{flag2}}</span><i class="fa fa-envelope fa-1x" style="color:PeachPuff" aria-hidden="true"></i></a>
+<a href="{% url 'appointment_view' %}" class="btn btn-student btn-lg" role="button">&nbsp;View Appointments&nbsp;<span class="badge">{{flag_appointment}}</span></a>
+<a href="{% url 'view_chatroom' %}" class="btn btn-student btn-lg" role="button">&nbsp;Chat rooms&nbsp;</a>
+<a href="{% url 'calendar' %}" class="btn btn-student btn-lg" role="button">&nbsp;Calendar&nbsp;<i class="fa fa-calendar fa-1x" style="color:Silver" aria-hidden="true"></i></a>
+<a href="{% url 'view_messages' %}" class="btn btn-student btn-lg" role="button">&nbsp;Messages&nbsp;<span class="badge">{{flag2}}</span>&nbsp;<i class="fa fa-envelope fa-1x" style="color:PeachPuff" aria-hidden="true"></i></a>
 {% if user.is_normal %}
-<a href="{% url 'view_professionals' %}" class="btn btn-student btn-lg" role="button">View Professionals</a>
+<a href="{% url 'view_professionals' %}" class="btn btn-student btn-lg" role="button">&nbsp;View Professionals&nbsp;</a>
 
 {% elif user.is_professional %}
-<a href="{% url 'view_appointment_schedule' %}" class="btn btn-student btn-lg" role="button">Appointment Schedules</a>
-   <a href="{% url 'view_achievements' %}" class="btn btn-student btn-lg" role="button">Achievements</a>
+<a href="{% url 'view_appointment_schedule' %}" class="btn btn-student btn-lg" role="button">&nbsp;Appointment Schedules&nbsp;</a>
+   <a href="{% url 'view_achievements' %}" class="btn btn-student btn-lg" role="button">&nbsp;Achievements&nbsp;</a>
 
 {% endif %}
    {% else %}
-             <a href="{% url 'login' %}" class="btn btn-outline-secondary"><span class="glyphicon glyphicon-user"></span>Log in</a>
-          <a href="{% url 'signup' %}" class="btn btn-primary ml-2"><span class="glyphicon glyphicon-log-in"></span>Sign up</a>
+             <a href="{% url 'login' %}" class="btn btn-outline-secondary"><span class="glyphicon glyphicon-user"></span>&nbsp;Log in&nbsp;</a>
+          <a href="{% url 'signup' %}" class="btn btn-primary ml-2"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Sign up&nbsp;</a>
     {% endif %}
 </div>
   {% include "sidebar_base.html" %}
@@ -80,11 +80,11 @@ html, body {
 {% block body %}
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container">
-    <li><button class="openbtn" onclick="openNav()">&#9776;</button></li>
+    <li><button class="openbtn" onclick="openNav()"> &#9776;</button></li>
     {% if user.is_authenticated %}
-    <a class="navbar-brand" href="{% url 'profile_home' %}">Health Portal</a>
+    <a class="navbar-brand" href="{% url 'profile_home' %}">&nbsp;Health Portal&nbsp;</a>
     {% else %}
-    <a class="navbar-brand" href="{% url 'home' %}">Health Portal</a>
+    <a class="navbar-brand" href="{% url 'home' %}">&nbsp;Health Portal&nbsp;</a>
     {% endif %}
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -94,20 +94,20 @@ html, body {
         <ul class="navbar-nav navbar-right">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="glyphicon glyphicon-user"></span>{{ user.username }}
+              <span class="glyphicon glyphicon-user"></span> {{ user.username }}
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
-              <a class="dropdown-item" href="{% url 'profile' %}">My account</a>
-              <a class="dropdown-item" href="{% url 'change_password' %}">Change password</a>
+              <a class="dropdown-item" href="{% url 'profile' %}"> My account </a>
+              <a class="dropdown-item" href="{% url 'change_password' %}"> Change password </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+              <a class="dropdown-item" href="{% url 'logout' %}"> Log out </a>
             </div>
           </li>
         </ul>
       {% else %}
         <form class="form-inline navbar-right">
-          <a href="{% url 'login' %}" class="btn btn-outline-secondary"><span class="glyphicon glyphicon-user"></span>Log in</a>
-          <a href="{% url 'signup' %}" class="btn btn-primary ml-2"><span class="glyphicon glyphicon-log-in"></span>Sign up</a>
+          <a href="{% url 'login' %}" class="btn btn-outline-secondary"><span class="glyphicon glyphicon-user"></span>&nbsp;Log in</a>
+          <a href="{% url 'signup' %}" class="btn btn-primary ml-2"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Sign up</a>
         </form>
       {% endif %}
     </div>

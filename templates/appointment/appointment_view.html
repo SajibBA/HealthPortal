@@ -17,6 +17,7 @@
         <h4>Here is your Appointment for today, &nbsp {{time}} :</h4>
         <table class="table">
             <thead>
+            <tr class="danger">
             {% if user.is_normal %}
                 <th>Specialist</th>
             {% else %}
@@ -26,6 +27,7 @@
                 <th>Time</th>
                 <th>Status</th>
                 <th>Action</th>
+            </tr>
             </thead>
             <tbody>
                 <!-- {{today_appoint}} -->
@@ -59,6 +61,7 @@
         <h4>Your Other Appointments:</h4>
         <table class="table">
             <thead>
+            <tr class="warning">
             {% if user.is_normal %}
                 <th>Specialist</th>
             {% else %}
@@ -69,6 +72,7 @@
                 <th>Time</th>
                 <th>Status</th>
                 <th>Action</th>
+            </tr>
             </thead>
             <tbody>
                 {%for appointment in appointments%}

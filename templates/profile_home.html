@@ -1,22 +1,24 @@
 {% extends 'base.html' %}
 
+<div class="row row-no-gutters">
+
 {% block breadcrumb %}
      {% if user.is_authenticated %}
 
-<li class="breadcrumb-item"><a href="{% url 'appointment_view' %}" class="btn btn-student btn-lg" role="button">View Appointments<span class="badge">{{flag_appointment}}</span></a></li>
-<li class="breadcrumb-item"><a href="{% url 'view_chatroom' %}" class="btn btn-student btn-lg" role="button">Chat rooms</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'calendar' %}" class="btn btn-student btn-lg" role="button">calendar<i class="fa fa-calendar fa-1x" style="color:black" aria-hidden="true"></i></a></li>
+<li class="breadcrumb-item"><a href="{% url 'appointment_view' %}" class="btn btn-student btn-lg" role="button"> View Appointments <span class="badge">{{flag_appointment}}</span></a></li>
+<li class="breadcrumb-item"><a href="{% url 'view_chatroom' %}" class="btn btn-student btn-lg" role="button"> Chat rooms </a></li>
+  <li class="breadcrumb-item"><a href="{% url 'calendar' %}" class="btn btn-student btn-lg" role="button"> Calendar <i class="fa fa-calendar fa-1x" style="color:black" aria-hidden="true"></i></a></li>
             {% if flag %}
-            <li class="breadcrumb-item"><a href="{% url 'view_messages' %}" class="btn btn-student btn-lg" role="button">messages<span class="badge">{{flag2}}</span><i class="fa fa-envelope fa-1x" style="color:PeachPuff " aria-hidden="true"></i><i class="fa fa-bell-o" style="color:red" aria-hidden="true"></i></a></li>
+            <li class="breadcrumb-item"><a href="{% url 'view_messages' %}" class="btn btn-student btn-lg" role="button"> Messages <span class="badge">{{flag2}}</span>&nbsp;<i class="fa fa-envelope fa-1x" style="color:PeachPuff " aria-hidden="true"></i>&nbsp;<i class="fa fa-bell-o" style="color:red" aria-hidden="true"></i></a></li>
             {% else %}
-            <li class="breadcrumb-item"><a href="{% url 'view_messages' %}" class="btn btn-student btn-lg" role="button">messages<span class="badge">{{flag2}}</span><i class="fa fa-envelope fa-1x" style="color:PeachPuff" aria-hidden="true"></i></a></li>
+            <li class="breadcrumb-item"><a href="{% url 'view_messages' %}" class="btn btn-student btn-lg" role="button"> Messages <span class="badge">{{flag2}}</span>&nbsp;<i class="fa fa-envelope fa-1x" style="color:PeachPuff" aria-hidden="true"></i></a></li>
             {% endif %}
 {% if user.is_normal %}
-  <li class="breadcrumb-item"><a href="{% url 'view_professionals' %}" class="btn btn-student btn-lg" role="button">View Professionals</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'view_professionals' %}" class="btn btn-student btn-lg" role="button"> View Professionals </a></li>
 
 {% elif user.is_professional %}
-  <li class="breadcrumb-item"><a href="{% url 'view_appointment_schedule' %}" class="btn btn-student btn-lg" role="button">Appointment Schedules</a></li>
-<li class="breadcrumb-item"><a href="{% url 'view_achievements' %}" class="btn btn-student btn-lg" role="button">Achievements</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'view_appointment_schedule' %}" class="btn btn-student btn-lg" role="button"> Appointment Schedules </a></li>
+<li class="breadcrumb-item"><a href="{% url 'view_achievements' %}" class="btn btn-student btn-lg" role="button"> Achievements </a></li>
 
 {% endif %}
     {% endif %}
@@ -29,26 +31,31 @@
 
 <div id="main">
 
-   <h2>Hello! {{ user.username }}</h2>
-
-
-<div class="row">
- <div class="col-sm-8.5">
+<div class="row row-no-gutters">
     <!-- Column -->
-     {% if user.is_professional %}
-        <div class="col-xs-9 col-md-7">
+    <div class="col-xs-9 col-md-7">
             <div class="card-hover">
                     <div class="text-center" style="background-color:;color:black;padding:10px;">
                         <h1 class="font-light text-white"></h1>
-                        <h1 class="text-black">{{ final_rating }}/5<sub> ({{ rater }})</sub></h1>
+                        <h1 class="text-black">Hello! {{ user.username }}</h1>
+                    </div>
+                </div>
+        </div>
+     {% if user.is_professional %}
+        <div class="col-xs-3 col-md-5">
+            <div class="card-hover">
+                    <div class="text-center" style="background-color:;color:black;padding:10px;">
+                        <h1 class="font-light text-white"></h1>
+                        <h1 style="">{{ final_rating }}/5</h1><h6 class="text-black">({{ rater }})</h6>
                         <h6 class="text-black">Rating</h6>
                     </div>
                 </div>
         </div>
      {% endif %}
+ <div class="col-sm-8.5">
         <!-- Column -->
 
-     <button type="button" class="btn btn-info btn-block" onClick="Health()">
+     <button type="button" class="btn btn-success btn-block" onClick="Health()">
             Latest Health related news
         </button>
      <!-- start sw-rss-feed code -->
@@ -99,7 +106,7 @@ rssfeed_cache = "d7c92de107b8accb3bb5ecd060434f64";
 <!-- end sw-rss-feed code -->
      </div>
 
- <button type="button" class="btn btn-info btn-block" onClick="Covid()">
+ <button type="button" class="btn btn-success btn-block" onClick="Covid()">
             Latest Covid related news
         </button>
      <!-- start sw-rss-feed code -->
@@ -158,8 +165,8 @@ rssfeed_cache = "d7c92de107b8accb3bb5ecd060434f64";
 
  </div>
     {% if user.is_professional %}
-    <div class=class="col-sm-8" >
-            <button type="button" onClick="Reviews()" class="btn btn-info btn-block">
+    <div class=class="col-sm-3.5" >
+            <button type="button" onClick="Reviews()" class="btn btn-success btn-block">
             Reviews
             </button>
         <br/>
@@ -189,6 +196,8 @@ rssfeed_cache = "d7c92de107b8accb3bb5ecd060434f64";
     {% endif %}
 
 </div>
+</div>
+
 </div>
 {% include "sidebar_base.html" %}
 <script>

@@ -7,7 +7,7 @@
 
 {% block content %}
 
-  <li><a href="{% url 'search_professionals' %}" class="btn btn-primary btn-sm" role="button" >Search Professionals by professions</a></li>
+  <a href="{% url 'search_professionals' %}" class="btn btn-primary btn-sm" role="button" >Search Professionals by professions</a>
 <div style="background-color:silver;color:black;padding:10px;">
   <form method="get">
     {{myFilter.form}}
@@ -15,9 +15,10 @@
       <span class="glyphicon glyphicon-search"></span> Search</button>
   </form>
 </div>
-  <table class="table">
+<div class="table-responsive">
+  <table class="table table-hover table-condensed ">
     <thead class="thead-inverse">
-      <tr>
+      <tr class="success">
         <th>Username</th>
         <th>Profile Pic</th>
         <th>Name</th>
@@ -29,8 +30,8 @@
       {% for person in person %}
       {% if person.is_professional %}
         <tr>
-            <td class="align-middle"><a href="{% url 'view_professionals_profile' person.pk %}">{{ person.username }}</a></td>
-            <td><img class="img-responsive" src="{{ person.profile_pic.url }}" width="100px" /></td>
+            <td class="align-middle align-center" style="color:silver;"><a href="{% url 'view_professionals_profile' person.pk %}">{{ person.username }}</a></td>
+            <td><img class="img-responsive" src="{{ person.profile_pic.url }}" alt="HTML5" style="width:128px;height:128px" /></td>
             <td class="align-middle">{{ person.first_name }} {{ person.last_name }}</td>
             <td class="align-middle">{{ person.professional.profession }}</td>
             <td class="align-middle">{{ person.professional.speciality }}</td>
@@ -39,4 +40,5 @@
       {% endfor %}
     </tbody>
   </table>
+</div>
 {% endblock %}

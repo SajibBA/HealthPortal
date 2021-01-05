@@ -19,9 +19,9 @@
                     <div class="media">
                       <div class="media-left">
                           {% if ach.achievement_pic %}
-                        <img src="/media/{{ ach.achievement_pic }}"  style="width:200px">
+                        <img src="/media/{{ ach.achievement_pic }}"  alt="HTML5" style="width:200px;height:128px">
                           {% else %}
-                          {% load static %}<img src="{% static 'images/achievement.png' %}"style="width:50px">
+                          {% load static %}<img src="{% static 'images/achievement.png' %}"alt="HTML5" style="width:200px;height:128px">
                           {% endif %}
                       </div>
                       <div class="media-body">

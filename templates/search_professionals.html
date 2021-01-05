@@ -3,7 +3,7 @@
 {% block breadcrumb %}
   <li class="breadcrumb-item active">Professionals</li>
   <li class="breadcrumb-item"><a href="{% url 'profile_home' %}"><button class="btn"><i class="fa fa-home"></i> Home</button></a></li>
-  <li class="breadcrumb-item"><button class="btn" onClick="javascript:history.go(-1);"></i>&#9756;Back</button></a></li>
+  <li class="breadcrumb-item"><button class="btn" onClick="javascript:history.go(-1);"></i>&#9756; Back </button></a></li>
 {% endblock %}
 
 {% block content %}
@@ -14,9 +14,9 @@
       <span class="glyphicon glyphicon-search"></span> Search</button>
   </form>
 </div>
-  <table class="table">
+  <table class="table table-hover table-condensed">
     <thead class="thead-inverse">
-      <tr>
+      <tr class="success">
         <th>Username</th>
         <th>Profile Pic</th>
         <th>Name</th>
@@ -29,7 +29,7 @@
       {% if professional.person.is_professional %}
         <tr>
             <td class="align-middle"><a href="{% url 'view_professionals_profile' professional.person.pk %}">{{ professional.person.username }}</a></td>
-            <td><img class="img-responsive" src="{{ professional.person.profile_pic.url }}" width="100px" /></td>
+            <td><img class="img-responsive" src="{{ professional.person.profile_pic.url }}" alt="HTML5" style="width:128px;height:128px" /></td>
             <td class="align-middle">{{ professional.person.first_name }} {{ professional.person.last_name }}</td>
             <td class="align-middle">{{ professional.profession }}</td>
             <td class="align-middle">{{ professional.speciality }}</td>

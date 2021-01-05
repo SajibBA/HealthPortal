@@ -3,7 +3,7 @@
 
 
 {% block content %}
-   <h2>Hello {{ user.username }}</h2>
+   <h2> My Username: {{ user.username }}</h2>
     <img src="{{ user.profile_pic.url }}"  width="100px" alt="">
     <ul>
         <li>First name= {{ user.first_name }}</li>
@@ -26,8 +26,8 @@
     {% if user.aboutprofessional %}
     <ul>
         <h5><b>About Myself</b> </h5>
-        <p>{{ user.aboutprofessional.info }}</p>
-          <a href="{% url 'about_edit' user.aboutprofessional.pk %}" class="btn btn-student btn-lg" role="button">Edit About</a>
+        <p><pre class="pre-scrollable">{{ user.aboutprofessional.info }}</pre></p>
+<a href="{% url 'about_edit' user.aboutprofessional.pk %}" class="btn btn-student btn-lg" role="button">Edit About</a>
     </ul>
     {% else %}
     <ul>
