@@ -9,18 +9,20 @@
 <li class="breadcrumb-item"><a href="{% url 'view_chatroom' %}" class="btn btn-student btn-lg" role="button"> Chat rooms </a></li>
   <li class="breadcrumb-item"><a href="{% url 'calendar' %}" class="btn btn-student btn-lg" role="button"> Calendar <i class="fa fa-calendar fa-1x" style="color:black" aria-hidden="true"></i></a></li>
             {% if flag %}
-            <li class="breadcrumb-item"><a href="{% url 'view_messages' %}" class="btn btn-student btn-lg" role="button"> Messages <span class="badge">{{flag2}}</span>&nbsp;<i class="fa fa-envelope fa-1x" style="color:PeachPuff " aria-hidden="true"></i>&nbsp;<i class="fa fa-bell-o" style="color:red" aria-hidden="true"></i></a></li>
+            <li class="breadcrumb-item"><a href="{% url 'view_messages' %}" class="btn btn-student btn-lg" role="button"> Messages <span class="badge">{{flag2}}</span>&nbsp;<i class="fa fa-envelope fa-1x" style="color:PeachPuff " aria-hidden="true"></i></a></li>
             {% else %}
             <li class="breadcrumb-item"><a href="{% url 'view_messages' %}" class="btn btn-student btn-lg" role="button"> Messages <span class="badge">{{flag2}}</span>&nbsp;<i class="fa fa-envelope fa-1x" style="color:PeachPuff" aria-hidden="true"></i></a></li>
             {% endif %}
 {% if user.is_normal %}
   <li class="breadcrumb-item"><a href="{% url 'view_professionals' %}" class="btn btn-student btn-lg" role="button"> View Professionals </a></li>
+  <li class="breadcrumb-item"><a href="{% url 'self_assessment' %}" class="btn btn-student btn-lg" role="button"> Self Assessment </a></li>
 
 {% elif user.is_professional %}
   <li class="breadcrumb-item"><a href="{% url 'view_appointment_schedule' %}" class="btn btn-student btn-lg" role="button"> Appointment Schedules </a></li>
 <li class="breadcrumb-item"><a href="{% url 'view_achievements' %}" class="btn btn-student btn-lg" role="button"> Achievements </a></li>
 
 {% endif %}
+    <li class="breadcrumb-item"><a href="{% url 'emergency' %}" class="btn btn-student btn-lg" role="button" style="color:red;"> Emergency </a></li>
     {% endif %}
 {% endblock %}
 

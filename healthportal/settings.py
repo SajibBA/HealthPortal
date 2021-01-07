@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'profiles',
     'schedules',
     'chatapp',
+    'emergency',
+    'self_assessment',
 
 
 ]

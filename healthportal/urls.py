@@ -24,6 +24,8 @@ urlpatterns = [
     path('', include('profiles.urls')),
     path('', include('schedules.urls')),
     path('', include('chatapp.urls')),
+    path('', include('emergency.urls')),
+    path('', include('self_assessment.urls')),
 
 ]
 

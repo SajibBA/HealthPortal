@@ -62,12 +62,14 @@ html, body {
 <a href="{% url 'view_messages' %}" class="btn btn-student btn-lg" role="button">&nbsp;Messages&nbsp;<span class="badge">{{flag2}}</span>&nbsp;<i class="fa fa-envelope fa-1x" style="color:PeachPuff" aria-hidden="true"></i></a>
 {% if user.is_normal %}
 <a href="{% url 'view_professionals' %}" class="btn btn-student btn-lg" role="button">&nbsp;View Professionals&nbsp;</a>
+   <a href="{% url 'self_assessment' %}" class="btn btn-student btn-lg" role="button"> Self Assessment </a>
 
 {% elif user.is_professional %}
 <a href="{% url 'view_appointment_schedule' %}" class="btn btn-student btn-lg" role="button">&nbsp;Appointment Schedules&nbsp;</a>
    <a href="{% url 'view_achievements' %}" class="btn btn-student btn-lg" role="button">&nbsp;Achievements&nbsp;</a>
 
 {% endif %}
+<a href="{% url 'emergency' %}" class="btn btn-student btn-lg" role="button" style="color:red;"> Emergency </a>
    {% else %}
              <a href="{% url 'login' %}" class="btn btn-outline-secondary"><span class="glyphicon glyphicon-user"></span>&nbsp;Log in&nbsp;</a>
           <a href="{% url 'signup' %}" class="btn btn-primary ml-2"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Sign up&nbsp;</a>

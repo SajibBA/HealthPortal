@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Emergency</li>
+  <li class="breadcrumb-item"><a href="{% url 'profile_home' %}"><button class="btn"><i class="fa fa-home"></i> Home</button></a></li>
+
+{% endblock %}
+
+{% block content %}
+<h1>
+     999 emergency helpline for Bangladesh
+</h1>
+<div class="container">
+  <h2>Available services</h2>
+  <p>
+      search for available services
+  </p>
+  <ul class="nav nav-pills">
+    <li class="active"><a data-toggle="pill" href="#ambulance">Ambulance</a></li>
+    <li><a data-toggle="pill" href="#doctor">Doctor</a></li>
+    <li><a data-toggle="pill" href="#hospital">Hospital</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="ambulance" class="tab-pane fade in active">
+      <h3>Ambulance</h3>
+      <p><table class="table table-hover table-condensed">
+    <thead class="thead-inverse">
+      <tr class="success">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Location</th>
+          <th>Phone no</th>
+          <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td class="align-middle">a1</td>
+      <td class="align-middle">ambulance1</td>
+      <td class="align-middle">lane 1</td>
+      <td class="align-middle">0011</td>
+      <td class="align-middle">available</td>
+    </tr>
+    <tr>
+      <td class="align-middle">a2</td>
+      <td class="align-middle">ambulance2</td>
+      <td class="align-middle">lane 2</td>
+      <td class="align-middle">0012</td>
+      <td class="align-middle">available</td>
+    </tr>
+    <tr>
+      <td class="align-middle">a3</td>
+      <td class="align-middle">ambulance3</td>
+      <td class="align-middle">lane 3</td>
+      <td class="align-middle">0013</td>
+      <td class="align-middle">not available</td>
+    </tr>
+    </tbody>
+    </table>
+    </p>
+    </div>
+    <div id="doctor" class="tab-pane fade">
+      <h3>Doctor</h3>
+      <p>
+          <table class="table table-hover table-condensed">
+    <thead class="thead-inverse">
+      <tr class="success">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Location</th>
+          <th>Phone no</th>
+          <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td class="align-middle">d1</td>
+      <td class="align-middle">doctor1</td>
+      <td class="align-middle">area 1</td>
+      <td class="align-middle">0321</td>
+      <td class="align-middle">not available</td>
+    </tr>
+    <tr>
+      <td class="align-middle">d2</td>
+      <td class="align-middle">doctor2</td>
+      <td class="align-middle">area 2</td>
+      <td class="align-middle">0322</td>
+      <td class="align-middle">available</td>
+    </tr>
+    <tr>
+      <td class="align-middle">d3</td>
+      <td class="align-middle">doctor3</td>
+      <td class="align-middle">area 3</td>
+      <td class="align-middle">0323</td>
+      <td class="align-middle">available</td>
+    </tr>
+    <tr>
+      <td class="align-middle">d4</td>
+      <td class="align-middle">doctor4</td>
+      <td class="align-middle">area 4</td>
+      <td class="align-middle">0324</td>
+      <td class="align-middle">not available</td>
+    </tr>
+    </tbody>
+    </table>
+      </p>
+    </div>
+    <div id="hospital" class="tab-pane fade">
+      <h3>Hospital</h3>
+      <p>
+          <table class="table table-hover table-condensed">
+    <thead class="thead-inverse">
+      <tr class="success">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Location</th>
+          <th>Phone no</th>
+          <th>Available seat</th>
+          <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td class="align-middle">h1</td>
+      <td class="align-middle">hospital1</td>
+      <td class="align-middle">area 1</td>
+      <td class="align-middle">0991</td>
+      <td class="align-middle">6</td>
+      <td class="align-middle">available</td>
+    </tr>
+    <tr>
+      <td class="align-middle">h2</td>
+      <td class="align-middle">hospital2</td>
+      <td class="align-middle">area 2</td>
+      <td class="align-middle">0992</td>
+      <td class="align-middle">2</td>
+      <td class="align-middle">available</td>
+    </tr>
+    <tr>
+      <td class="align-middle">h3</td>
+      <td class="align-middle">hospital3</td>
+      <td class="align-middle">area 3</td>
+      <td class="align-middle">0993</td>
+      <td class="align-middle">0</td>
+      <td class="align-middle">not available</td>
+    </tr>
+    <tr>
+      <td class="align-middle">h4</td>
+      <td class="align-middle">hospital4</td>
+      <td class="align-middle">area 4</td>
+      <td class="align-middle">0994</td>
+      <td class="align-middle">9</td>
+      <td class="align-middle">available</td>
+    </tr>
+    </tbody>
+    </table>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+

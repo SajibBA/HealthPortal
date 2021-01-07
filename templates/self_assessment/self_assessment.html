@@ -1,0 +1,278 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Self Assessment</li>
+  <li class="breadcrumb-item"><a href="{% url 'profile_home' %}"><button class="btn"><i class="fa fa-home"></i> Home</button></a></li>
+
+{% endblock %}
+
+{% block content %}
+<h1>
+     Self Assessment
+</h1>
+<div class="container">
+  <h2>Available Assessment</h2>
+  <p>
+      search for available Assessment
+  </p>
+  <ul class="nav nav-pills">
+    <li class="active"><a data-toggle="pill" href="#physical" class="btn btn-default" >Physical</a></li>
+    <li><a data-toggle="pill" href="#mental" class="btn btn-default" >Mental</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="physical" class="tab-pane fade in active">
+      <h3>Physical</h3>
+      <p><table class="table table-hover table-condensed">
+    <thead class="thead-inverse">
+      <tr class="success">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Details</th>
+          <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td class="align-middle">SA001</td>
+      <td class="align-middle">BMI</td>
+      <td class="align-middle">Calculate Your Body Mass Index</td>
+      <td class="align-middle"><button onClick="Bmi()">Start</button></td>
+              <div id="bmi" style="display:none"><span class="close"><button class="btn btn-danger" onClick="Bmi()">close</button></span>
+          <iframe src="https://bmicalculatorusa.com/widgets-usa/widget.php?t=720x300" width="720" height="300" frameborder="0"></iframe><p style="font-family: sans-serif; font-size: 14px">Supplied by <a style="color: #3d4195;" href="https://bmicalculatorusa.com">BMI Calculator USA</a></p>
+              </div>
+    </tr>
+    <tr>
+      <td class="align-middle">BP01</td>
+      <td class="align-middle">Your blood pressure</td>
+      <td class="align-middle">Use this tool to enter your blood pressure reading and find out what it means, along with information on how to reduce a high reading.</td>
+      <td class="align-middle"><button onClick="BloodPressure()">Start</button></td>
+              <div id="bloodpressure" style="display:none"><span class="close"><button class="btn btn-danger" onClick="BloodPressure()">close</button></span>
+<!--NHS tool start--><iframe id="tool_blood-pressure" src="https://assets.nhs.uk/tools/blood-pressure/index.html?syn_id=662ca700-4f5c-11eb-87c5-9993bada0fee" style = "width:100%;" frameborder="0" scrolling="no" seamless></iframe><script src="https://assets.nhs.uk/tools/blood-pressure/js/iframe_helper.js"></script><!--NHS tool end-->
+              </div>
+    </tr>
+    <tr>
+      <td class="align-middle">CDCCSC</td>
+      <td class="align-middle">Coronavirus Self-Checker</td>
+      <td class="align-middle">The Coronavirus Self-Checker is an interactive clinical assessment tool that will assist individuals ages 13 and older, and parents and caregivers of children ages 2 to 12 on deciding when to seek testing or medical care if they suspect they or someone they know has contracted COVID-19 or has come into close contact with someone who has COVID-19.
+
+The online, mobile-friendly tool asks a series of questions, and based on the user’s responses, provides recommended actions and resources.
+</td>
+      <td class="align-middle"><div data-cdc-widget='healthBot' data-cdc-theme='theme7' class='cdc-widget-color-white'  data-cdc-language='en-us'>
+<button>Coronavirus Self-Checker</button>
+</div>
+<script src='https://t.cdc.gov/1M1B'></script></td>
+    </tr>
+    <tr>
+      <td class="align-middle">ht1</td>
+      <td class="align-middle">Do You Need a Hearing Test?</td>
+      <td class="align-middle">If you are 18 to 64 years old, the following questions will help you determine if you need to have your hearing tested by a health professional. Answer YES or NO.</td>
+      <td class="align-middle"><button onClick="Ht()">Start</button></td>
+              <div id="ht" style="display:none"><span class="close"><button class="btn btn-danger" onClick="Ht()">close</button></span>
+<div style="background: rgba(0, 200, 0, 0.25);">
+                <h3>If you are 18 to 64 years old, the following questions will help you determine if you need to have your hearing tested by a health professional. Answer YES or NO.</h3>
+            <p>
+              <ol>
+                <li><p>Do you sometimes feel embarrassed when you meet new people because you struggle to hear?</p>
+  <input type="radio"  name="choice" value="yes">
+  <label>Yes</label><br>
+  <input type="radio"  name="choice" value="no">
+  <label>No</label><br>
+                </li>
+                <li><p>Do you feel frustrated when talking to members of your family because you have difficulty hearing them?</p>
+  <input type="radio"  name="choice2" value="yes">
+  <label>Yes</label><br>
+  <input type="radio"  name="choice2" value="no">
+  <label>No</label><br>
+                </li>
+                <li><p>Do you have difficulty hearing or understanding co-workers, clients, or customers?</p>
+  <input type="radio"  name="choice3" value="yes">
+  <label>Yes</label><br>
+  <input type="radio"  name="choice3" value="no">
+  <label>No</label><br>
+                </li>
+                <li><p>Do you feel restricted or limited by a hearing problem?</p>
+  <input type="radio"  name="choice4" value="yes">
+  <label>Yes</label><br>
+  <input type="radio"  name="choice4" value="no">
+  <label>No</label><br>
+                </li>
+                <li><p>Do you have difficulty hearing when visiting friends, relatives, or neighbors?</p>
+  <input type="radio"  name="choice5" value="yes">
+  <label>Yes</label><br>
+  <input type="radio"  name="choice5" value="no">
+  <label>No</label><br>
+                </li>
+                <li><p>Do you have trouble hearing in the movies or in the theater?</p>
+  <input type="radio"  name="choice6" value="yes">
+  <label>Yes</label><br>
+  <input type="radio"  name="choice6" value="no">
+  <label>No</label><br>
+                </li>
+                <li><p>Does a hearing problem cause you to argue with family members?</p>
+  <input type="radio"  name="choice7" value="yes">
+  <label>Yes</label><br>
+  <input type="radio"  name="choice7" value="no">
+  <label>No</label><br>
+                </li>
+                <li><p>Do you have trouble hearing the TV or radio at levels that are loud enough for others?</p>
+  <input type="radio"  name="choice8" value="yes">
+  <label>Yes</label><br>
+  <input type="radio"  name="choice8" value="no">
+  <label>No</label><br>
+                </li>
+                <li><p>Do you feel that any difficulty with your hearing limits your personal life or social life?</p>
+  <input type="radio"  name="choice9" value="yes">
+  <label>Yes</label><br>
+  <input type="radio"  name="choice9" value="no">
+  <label>No</label><br>
+                </li>
+                <li><p>Do you have trouble hearing family or friends when you are together in a restaurant?</p>
+  <input type="radio"  name="choice10" value="yes">
+  <label>Yes</label><br>
+  <input type="radio"  name="choice10" value="no">
+  <label>No</label><br>
+                </li>
+              </ol>
+                <h3>If you answered “yes” to three or more of these questions, you may want to see an otolaryngologist (an ear, nose, and throat specialist) or an audiologist for a hearing evaluation. </h3>
+</div>
+</div>
+    </tr>
+     <tr>
+      <td class="align-middle">MLSA001</td>
+      <td class="align-middle">Mole self-assessment</td>
+      <td class="align-middle">Skin cancer is one of the most common cancers in the UK. Use this test to find out whether your mole needs to be checked by a healthcare professional.</td>
+      <td class="align-middle"><button onClick="Mole()">Start</button></td>
+              <div id="mole" style="display:none"><span class="close"><button class="btn btn-danger" onClick="Mole()">close</button></span>
+<!--NHS tool start--><iframe id="tool_self-assessments_62" src="https://assets.nhs.uk/tools/self-assessments/index.html?variant=62&syn_id=662ca700-4f5c-11eb-87c5-9993bada0fee" style = "width:100%;" frameborder="0" scrolling="no" seamless></iframe><script src="https://assets.nhs.uk/tools/self-assessments/js/iframe_helper.js"></script><!--NHS tool end-->
+              </div>
+    </tr>
+    <tr>
+      <td class="align-middle">HPSA01</td>
+      <td class="align-middle">Heavy periods self-assessment</td>
+      <td class="align-middle">This short test will help you understand how heavy your periods are, and point you in the right direction for treatment options.</td>
+      <td class="align-middle"><button onClick="Periods()">Start</button></td>
+              <div id="periods" style="display:none"><span class="close"><button class="btn btn-danger" onClick="Periods()">close</button></span>
+<!--NHS tool start--><iframe id="tool_self-assessments_54" src="https://assets.nhs.uk/tools/self-assessments/index.html?variant=54&syn_id=662ca700-4f5c-11eb-87c5-9993bada0fee" style = "width:100%;" frameborder="0" scrolling="no" seamless></iframe><script src="https://assets.nhs.uk/tools/self-assessments/js/iframe_helper.js"></script><!--NHS tool end-->
+              </div>
+    </tr>
+    </tbody>
+    </table>
+    </p>
+    </div>
+    <div id="mental" class="tab-pane fade">
+      <h3>Mental</h3>
+      <p>
+          <table class="table table-hover table-condensed">
+    <thead class="thead-inverse">
+      <tr class="warning">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Details</th>
+          <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td class="align-middle">MDSA001</td>
+      <td class="align-middle">Mood self-assessment</td>
+      <td class="align-middle">This self-assessment helps you better understand how you've been feeling over the last fortnight, and points you in the right direction for helpful advice and information on anxiety and depression.</td>
+      <td class="align-middle"><button onClick="Mood()">Start</button></td>
+              <div id="mood" style="display:none"><span class="close"><button class="btn btn-danger" onClick="Mood()">close</button></span>
+          <!--NHS tool start--><iframe id="tool_self-assessments_44" src="https://assets.nhs.uk/tools/self-assessments/index.html?variant=44&syn_id=662ca700-4f5c-11eb-87c5-9993bada0fee" style = "width:100%;" frameborder="0" scrolling="no" seamless></iframe><script src="https://assets.nhs.uk/tools/self-assessments/js/iframe_helper.js"></script><!--NHS tool end-->
+              </div>
+    </tr>
+    <tr>
+      <td class="align-middle">DSSA001</td>
+      <td class="align-middle">Depression self-assessment</td>
+      <td class="align-middle">This self-assessment will help you assess whether you could be suffering from depression, based on how you've been feeling over the last fortnight.</td>
+      <td class="align-middle"><button onClick="Depression()">Start</button></td>
+              <div id="depression" style="display:none"><span class="close"><button class="btn btn-danger" onClick="Depression()">close</button></span>
+<!--NHS tool start--><iframe id="tool_self-assessments_42" src="https://assets.nhs.uk/tools/self-assessments/index.html?variant=42&syn_id=662ca700-4f5c-11eb-87c5-9993bada0fee" style = "width:100%;" frameborder="0" scrolling="no" seamless></iframe><script src="https://assets.nhs.uk/tools/self-assessments/js/iframe_helper.js"></script><!--NHS tool end-->
+              </div>
+    </tr>
+    <tr>
+      <td class="align-middle">HA001</td>
+      <td class="align-middle">Heart Age</td>
+      <td class="align-middle">The Heart Age Test tells you your heart age compared to your real age and explains why it's important to know your blood pressure and cholesterol numbers.</td>
+      <td class="align-middle"><button onClick="Heart()">Start</button></td>
+              <div id="heart" style="display:none"><span class="close"><button class="btn btn-danger" onClick="Heart()">close</button></span>
+<!--NHS tool start--><div id = "tool_heart-age" class = "tool_heart-age"></div><script id = "tool-script_heart-age" src="https://assets.nhs.uk/tools/heart-age/js/inline_launcher.js"></script><!--NHS tool start end-->
+              </div>
+    </tr>
+    <tr>
+      <td class="align-middle">MP001</td>
+      <td class="align-middle">Your Mind Plan</td>
+      <td class="align-middle">Your Mind plan helps you build a practical plan you can use to help maintain and improve your mental health and wellbeing. By answering this short quiz, the Every Mind Matters widget gives you 5 actions that can help you feel more in control, deal with stress and anxiety, boost your mood and improve your sleep.</td>
+      <td class="align-middle"><button onClick="MindPlan()">Start</button></td>
+              <div id="mindplan" style="display:none"><span class="close"><button class="btn btn-danger" onClick="MindPlan()">close</button></span>
+<!--NHS tool start--><div id='yourMindPlanQuiz' data-site-id='OrganisationName>' data-syndication-id='unknown'></div><script src='https://digitalcampaignsstorage.blob.core.windows.net/mental-health-tool/production/deploy/public/static/js/main.js'></script><!--NHS tool end-->
+              </div>
+    </tr>
+
+
+    </tbody>
+    </table>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+   function toggler(divId) {
+            $("#" + divId).toggle();
+        }
+
+        function Bmi() {
+            toggler('bmi');
+            $('#GFG_DOWN').text("DIV Box is toggling.");
+        }
+
+         function Ht() {
+            toggler('ht');
+            $('#GFG_DOWN').text("DIV Box is toggling.");
+        }
+
+        function Mood() {
+            toggler('mood');
+            $('#GFG_DOWN').text("DIV Box is toggling.");
+        }
+
+        function Depression() {
+            toggler('depression');
+            $('#GFG_DOWN').text("DIV Box is toggling.");
+        }
+
+        function Mole() {
+            toggler('mole');
+            $('#GFG_DOWN').text("DIV Box is toggling.");
+        }
+
+        function Heart() {
+            toggler('heart');
+            $('#GFG_DOWN').text("DIV Box is toggling.");
+        }
+
+        function Periods() {
+            toggler('periods');
+            $('#GFG_DOWN').text("DIV Box is toggling.");
+        }
+
+        function BloodPressure() {
+            toggler('bloodpressure');
+            $('#GFG_DOWN').text("DIV Box is toggling.");
+        }
+
+        function MindPlan() {
+            toggler('mindplan');
+            $('#GFG_DOWN').text("DIV Box is toggling.");
+        }
+
+
+</script>
+
+{% endblock %}
+
+
+
