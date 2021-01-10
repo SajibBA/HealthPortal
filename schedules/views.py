@@ -100,10 +100,10 @@ def event_delete(request, event_id):
     event.delete()
     return redirect("calendar")
 
-#appointment parts----------------------
+#   appointment parts----------------------
 
 
-class AppointmentCalendarView(generic.ListView):
+class AppointmentCalendarView(generic.ListView):   # Not Implemented
     model = Appointments
     template_name = 'calender/appointment_calendar.html'
 
