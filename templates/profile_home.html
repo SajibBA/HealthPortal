@@ -45,13 +45,132 @@
         </div>
      {% if user.is_professional %}
         <div class="col-xs-3 col-md-5">
-            <div class="card-hover">
-                    <div class="text-center" style="background-color:;color:black;padding:10px;">
-                        <h1 class="font-light text-white"></h1>
-                        <h1 style="">{{ final_rating }}/5</h1><h6 class="text-black">({{ rater }})</h6>
-                        <h6 class="text-black">Rating</h6>
-                    </div>
-                </div>
+            <style>
+                * {
+  box-sizing: border-box;
+}
+
+.heading {
+  font-size: 25px;
+  margin-right: 25px;
+}
+
+.fa {
+  font-size: 25px;
+}
+
+.checked {
+  color: orange;
+}
+
+/* Three column layout */
+.side {
+  float: left;
+  width: 15%;
+  margin-top: 10px;
+}
+
+.middle {
+  float: left;
+  width: 70%;
+  margin-top: 10px;
+}
+
+/* Place text to the right */
+.right {
+  text-align: right;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The bar container */
+.bar-container {
+  width: 100%;
+  background-color: #f1f1f1;
+  text-align: center;
+  color: white;
+}
+
+/* Responsive layout - make the columns stack on top of each other instead of next to each other */
+@media (max-width: 400px) {
+  .side, .middle {
+    width: 100%;
+  }
+  /* Hide the right column on small screens */
+  .right {
+    display: none;
+  }
+}
+            </style>
+            <div id="ratings">
+                <span class="heading">Your Rating</span>
+<p>{{ final_rating }} average based on {{ rater }} reviews.</p>
+<hr style="border:3px solid #f1f1f1">
+
+<div class="row">
+  <div class="side">
+    <div>5 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-5" style="width: {{ rate_percentage_5 }}%; height: 18px; background-color: #4CAF50;"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>{{rate_5}}</div>
+  </div>
+  <div class="side">
+    <div>4 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-4" style="width: {{ rate_percentage_4 }}%; height: 18px; background-color: #2196F3;"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>{{rate_4}}</div>
+  </div>
+  <div class="side">
+    <div>3 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-3" style="width: {{ rate_percentage_3 }}%; height: 18px; background-color: #00bcd4;"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>{{rate_3}}</div>
+  </div>
+  <div class="side">
+    <div>2 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-2" style="width: {{ rate_percentage_2 }}%; height: 18px; background-color: #ff9800;"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>{{rate_2}}</div>
+  </div>
+  <div class="side">
+    <div>1 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-1" style="width: {{ rate_percentage_1 }}%; height: 18px; background-color: #f44336;"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>{{rate_1}}</div>
+  </div>
+</div>
+
+            </div>
         </div>
      {% endif %}
  <div class="col-sm-8.5">

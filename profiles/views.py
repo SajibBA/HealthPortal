@@ -100,17 +100,47 @@ def profile_home(request):
     ratings = Ratings.objects.filter(rate_to=request.user)
     rates = 0
     rater = 0
+    rate_1 = 0
+    rate_2 = 0
+    rate_3 = 0
+    rate_4 = 0
+    rate_5 = 0
+
     for rate in ratings:
         rater = rater + 1
         rates = rates + rate.rating
+        if rate.rating == 1:
+            rate_1 = rate_1 + 1
+        elif rate.rating == 2:
+            rate_2 = rate_2 + 1
+        elif rate.rating == 3:
+            rate_3 = rate_3 + 1
+        elif rate.rating == 4:
+            rate_4 = rate_4 + 1
+        elif rate.rating == 5:
+            rate_5 = rate_5 + 1
     try:
         final_rating = rates / rater
+        rate_percentage_1 = rate_1 * 100 / rater
+        rate_percentage_2 = rate_2 * 100 / rater
+        rate_percentage_3 = rate_3 * 100 / rater
+        rate_percentage_4 = rate_4 * 100 / rater
+        rate_percentage_5 = rate_5 * 100 / rater
     except ZeroDivisionError:
         final_rating = 0
+        rate_percentage_1 = 0
+        rate_percentage_2 = 0
+        rate_percentage_3 = 0
+        rate_percentage_4 = 0
+        rate_percentage_5 = 0
     final_rating = round(final_rating, 2)
     reviews = Ratings.objects.filter(rate_to=request.user)
     context = {'flag': flag, 'flag2': flag2, 'flag_appointment': flag_appointment,
-               'final_rating': final_rating, 'reviews': reviews, 'rater': rater}
+               'final_rating': final_rating, 'reviews': reviews, 'rater': rater,
+               'rate_1': rate_1, 'rate_2': rate_2, 'rate_3': rate_3, 'rate_4': rate_4,
+               'rate_5': rate_5, 'rate_percentage_1': rate_percentage_1, 'rate_percentage_2': rate_percentage_2,
+               'rate_percentage_3': rate_percentage_3, 'rate_percentage_4': rate_percentage_4,
+               'rate_percentage_5': rate_percentage_5}
     return render(request, 'profile_home.html', context)
 
 
@@ -242,6 +272,7 @@ def view_professionals_profile(request, pk):
     rate_from = request.user
     rate_to = person
     given_rating = Ratings.objects.filter(rate_from=rate_from, rate_to=rate_to)
+    exist_rating = Ratings.objects.filter(rate_from=rate_from, rate_to=rate_to)
     reviews = Ratings.objects.filter(rate_to=rate_to)
     achievements = Achievements.objects.filter(holder=person)
     if request.POST and form_rate.is_valid():
@@ -266,21 +297,21 @@ def view_professionals_profile(request, pk):
                        'wed': wed,
                        'thus': thus, 'fri': fri, 'person': person, 'final_rating': final_rating, 'rater': rater,
                        'given_rating': given_rating, 'reviews': reviews,
-                       "achievements": achievements}
+                       'achievements': achievements, 'exist_rating': exist_rating}
             return render(request, 'view_professionals_profile.html', context)
         else:
             context = {'appointment_schedule': appointment_schedule, 'sat': sat, 'sun': sun, 'mon': mon, 'tue': tue,
                        'wed': wed,
                        'thus': thus, 'fri': fri, 'person': person, 'final_rating': final_rating, 'rater': rater,
                        'form_rate': form_rate, 'reviews': reviews,
-                       "achievements": achievements}
+                       "achievements": achievements, 'exist_rating': exist_rating}
             return render(request, 'view_professionals_profile.html', context)
     else:
         context = {'appointment_schedule': appointment_schedule, 'sat': sat, 'sun': sun, 'mon': mon, 'tue': tue,
                    'wed': wed,
                    'thus': thus, 'fri': fri, 'person': person, 'final_rating': final_rating, 'rater': rater,
                    'form_rate': form_rate, 'reviews': reviews,
-                   "achievements": achievements}
+                   "achievements": achievements, 'exist_rating': exist_rating}
         return render(request, 'view_professionals_profile.html', context)
 
 
