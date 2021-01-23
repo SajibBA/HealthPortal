@@ -32,7 +32,6 @@ def home(request):
     return render(request, 'home.html')
 
 
-
 # Registration and login------------
 
 
@@ -83,9 +82,9 @@ def profile_home(request):
         appointment = Appointments.objects.filter(appointment_from=request.user, date=date.today())
     else:
         appointment = Appointments.objects.filter(appointment_to=request.user, date=date.today())
-    flag = 0                                # ---For Notifications
+    flag = 0                                # ---For message Notifications
     flag2 = 0
-    flag_appointment = 0
+    flag_appointment = 0                    # ---For Appointment Notifications
     for messa in message:
         if messa.mark_as_read == 0:
             flag = 1
@@ -180,7 +179,7 @@ class ProfilePasswordChangeView(SuccessMessageMixin, PasswordChangeView):
     success_url = reverse_lazy('profile_home')
 
 
-# About person details------------
+# About person ------------
 
 def add_about(request):
     form = AboutForm(request.POST, request.FILES or None)

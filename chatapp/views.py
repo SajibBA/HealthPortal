@@ -14,6 +14,9 @@ from chatapp.filters import *
 from chatapp.forms import *
 
 
+# Create chat room
+
+
 def create_chatroom(request):
     form = ChatroomCreationForm(request.POST or None)
     if request.POST and form.is_valid():
@@ -34,12 +37,18 @@ def create_chatroom(request):
     return render(request, 'chatroom/create_chatroom.html', {'form': form})
 
 
+# All available chat rooms
+
+
 def view_chatroom(request):
     chatroom = Chatroom.objects.all()
     myFilter = ChatroomFilter(request.GET, queryset=chatroom)
     chatroom = myFilter.qs
     context = {'chatroom': chatroom, 'myFilter': myFilter}
     return render(request, 'chatroom/view_chatroom.html', context)
+
+
+# Inside of chat room/ live chats
 
 
 def live_chatroom(request, pk):
@@ -67,6 +76,9 @@ def live_chatroom(request, pk):
         return render(request, 'chatroom/livechatroom.html', context)
 
 
+# For password protected chatroom
+
+
 def protected_chatroom(request, pk):
     try:
         chat_room = Chatroom.objects.get(pk=pk)
@@ -89,6 +101,9 @@ def protected_chatroom(request, pk):
         return render(request, 'chatroom/protected_chatroom.html', context)
 
 
+# Choice between myself and anonymous
+
+
 def join_chatroom(request, pk):
     try:
         chat_room = Chatroom.objects.get(pk=pk)
@@ -96,6 +111,9 @@ def join_chatroom(request, pk):
         raise Http404
     context = {'chat_room': chat_room}
     return render(request, 'chatroom/join_chatroom.html', context)
+
+
+# anonymous version
 
 
 def anonymous_chatroom(request, pk):
@@ -121,6 +139,9 @@ def anonymous_chatroom(request, pk):
         context = {'chat_room': chat_room, 'chat_all': chat_all,
                    'live_person': live_person}
         return render(request, 'chatroom/anonymous_chatroom.html', context)
+
+
+# list of current user created chat rooms
 
 
 def mychatrooms(request):

@@ -20,7 +20,8 @@ from .models import *
 from .utils import Calendar, AppointmentCalendar
 from .forms import *
 
-# Calender views------------
+
+# Event Calender views------------
 
 
 def get_date(req_day):
@@ -202,6 +203,9 @@ def delete_appointment_schedule(request, pk):
     return redirect("view_appointment_schedule")
 
 
+# Selecting date/day for appointment
+
+
 def appointment_day(request, pk, **kwargs):
     try:
         person = Person.objects.get(pk=pk)
@@ -304,6 +308,9 @@ def appointment_create(request, date, schedule_pk):
         messages.success(request, 'Appointment Booked.')
         return HttpResponseRedirect(reverse('profile_home'))
     return render(request, 'appointment/appointment_create.html', context)
+
+
+# User's appointments
 
 
 def appointment_view(request):
